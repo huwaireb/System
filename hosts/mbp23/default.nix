@@ -34,7 +34,6 @@
 
     imports = [
       ../../profiles/platform._
-      ../../profiles/platform._/apps.nix
       ../../profiles/platform.darwin
     ];
   };

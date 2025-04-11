@@ -7,7 +7,7 @@
 {
   nix = {
     enable = true;
-    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.nix_2_28;
 
     registry = {
       nixpkgs.to = lib.mkForce {
