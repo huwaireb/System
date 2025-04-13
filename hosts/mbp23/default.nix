@@ -1,7 +1,6 @@
 {
   self,
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -29,7 +28,7 @@
 
   home-manager.users.rmu = {
     _module.args = {
-      inherit self inputs lib;
+      inherit self lib;
     };
 
     imports = [

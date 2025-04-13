@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     wl-clipboard
@@ -8,7 +8,6 @@
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
-    package = inputs.ghostty.packages.${pkgs.system}.default;
 
     settings = {
       theme = "GruvboxDark";

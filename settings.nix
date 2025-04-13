@@ -1,6 +1,5 @@
 {
   lib,
-  inputs,
   pkgs,
   ...
 }:
@@ -8,13 +7,6 @@
   nix = {
     enable = true;
     package = pkgs.nixVersions.nix_2_28;
-
-    registry = {
-      nixpkgs.to = lib.mkForce {
-        type = "path";
-        path = inputs.nixpkgs;
-      };
-    };
 
     settings = {
       keep-outputs = true;
