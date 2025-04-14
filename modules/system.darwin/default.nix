@@ -1,4 +1,11 @@
 {
   security.pam.services.sudo_local.touchIdAuth = true;
-  system.stateVersion = 5;
+
+  system.defaults.NSGlobalDomain.NSWindowShouldDragOnGesture = true;
+  system.defaults.CustomSystemPreferences."com.apple.AdLib" = {
+    allowApplePersonalizedAdvertising = false;
+    allowIdentifierForAdvertising = false;
+    forceLimitAdTracking = true;
+    personalizedAdsMigrated = false;
+  };
 }

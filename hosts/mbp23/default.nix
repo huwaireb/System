@@ -36,4 +36,6 @@
       ../../profiles/platform.darwin
     ];
   };
+
+  system.stateVersion = 5;
 }

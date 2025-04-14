@@ -144,7 +144,7 @@ in
         idle-timeout = 1;
         true-color = true;
         shell = [
-          "fish"
+          "nu"
           "-c"
         ];
 

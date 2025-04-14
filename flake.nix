@@ -4,12 +4,6 @@
   outputs =
     inputs:
     inputs.parts.lib.mkFlake { inherit inputs; } {
-      perSystem =
-        { pkgs, ... }:
-        {
-          formatter = pkgs.nixfmt-rfc-style;
-        };
-
       flake.darwinConfigurations.mbp23 = inputs.darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = { inherit (inputs) self; };
@@ -24,6 +18,7 @@
         ];
       };
 
+      imports = [ ./firmware ];
       systems = [
         "aarch64-darwin"
         "aarch64-linux"
