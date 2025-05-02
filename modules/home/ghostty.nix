@@ -1,17 +1,19 @@
-{ pkgs, ... }:
-let
-  inherit (pkgs.stdenv) isDarwin;
-in
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   programs.ghostty = {
     enable = true;
 
     # Don't actually install Ghostty if we are on Darwin.
     # Unavailable because Ghostty uses Xcode and Swift is behind a major release in nixpkgs.
-    package = if isDarwin then pkgs.writeScriptBin "not-ghostty" "" else pkgs.ghostty;
+    package = lib.mkIf config.isDarwin (pkgs.writeScriptBin "not-ghostty" "");
 
     # Bat syntax points to emptyDirectory.
-    installBatSyntax = !isDarwin;
+    installBatSyntax = !config.isDarwin;
 
     settings = {
       font-family = "Iosevka";

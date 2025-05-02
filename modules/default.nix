@@ -1,9 +1,15 @@
 {
+  config,
   lib,
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkIf;
+in
 {
+  imports = [ ./system.nix ];
+
   time.timeZone = "Asia/Dubai";
   programs.fish.enable = true;
 
@@ -21,7 +27,7 @@
 
       experimental-features = "nix-command flakes pipe-operators fetch-closure";
 
-      extra-platforms = lib.optionals (pkgs.stdenv.isDarwin) [
+      extra-platforms = mkIf config.isDarwin [
         "aarch64-darwin"
         "x86_64-darwin"
       ];
