@@ -7,6 +7,8 @@
   time.timeZone = "Asia/Dubai";
   programs.fish.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   nix = {
     enable = true;
     package = pkgs.nixVersions.nix_2_28;

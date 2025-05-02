@@ -5,6 +5,7 @@
       "stats"
       "ghostty"
       "raycast"
+      "whatsapp"
     ];
   };
 }
