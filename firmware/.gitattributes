@@ -1,0 +1,5 @@
+*.dts linguist-language=C
+*.dtsi linguist-language=C
+*.keymap linguist-language=C
+
+zmk/board/* linguist-vendored

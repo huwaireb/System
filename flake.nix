@@ -7,7 +7,7 @@
     inputs@{ nixpkgs, darwin, ... }:
     let
       inherit (builtins) groupBy readDir listToAttrs;
-      inherit (nixpkgs.lib) filterAttrs mapAttrs attrsToList;
+      inherit (nixpkgs.lib) assertMsg mapAttrs attrsToList;
 
       lib' = import ./lib {
         inherit inputs;
@@ -16,8 +16,11 @@
 
       hosts =
         readDir ./hosts
-        |> filterAttrs (_: type: type == "directory")
-        |> mapAttrs (host: _: import ./hosts/${host} lib')
+        |> mapAttrs (
+          host: type:
+          assert assertMsg (type == "directory") "All files in hosts/ should be directories (flake.nix)";
+          import ./hosts/${host} lib'
+        )
         |> attrsToList
         |> groupBy (
           { value, ... }:
@@ -28,7 +31,7 @@
           in
           class0 (class1 classFail)
         )
-        |> mapAttrs (_: v: listToAttrs v);
+        |> mapAttrs (_: listToAttrs);
     in
     hosts // { };
 
@@ -46,9 +49,5 @@
     };
   };
 
-  nixConfig.experimental-features = [
-    "flakes"
-    "nix-command"
-    "pipe-operators"
-  ];
+  nixConfig.experimental-features = "flakes nix-command pipe-operators";
 }
