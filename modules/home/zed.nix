@@ -3,7 +3,7 @@
     enable = true;
 
     userSettings = {
-      "theme" = "Gruvbox Dark";
+      theme = "Gruvbox Dark";
       "experimental.theme_overrides" = {
         "background.appearance" = "blurred";
         "background" = "#09090bBB";
@@ -29,122 +29,76 @@
         "editor.line_number" = "#ffffff80";
         "editor.active_line.background" = "#3f3f4640";
       };
-      "project_panel" = {
-        "dock" = "right";
-      };
-      "ui_font_size" = 13.8;
-      "buffer_font_size" = 22.0;
-      "buffer_font_family" = "Iosevka";
-      "ui_font_family" = "SF Pro Display";
+
+      project_panel.dock = "right";
+
+      ui_font_size = 13.8;
+      buffer_font_size = 22.0;
+      buffer_font_family = "Iosevka Nerd Font";
+      ui_font_family = "SF Pro Display";
       "unstable.ui_density" = "compact";
-      "vertical_scroll_margin" = 10;
+      vertical_scroll_margin = 10;
 
-      #
-      "remove_trailing_whitespace_on_save" = true;
-      "buffer_line_height" = "standard";
-      "indent_guides" = {
-        "enabled" = true;
-        "line_width" = 1;
-        "active_line_width" = 1;
+      remove_trailing_whitespace_on_save = true;
+      buffer_line_height = "standard";
+      indent_guides = {
+        enabled = true;
+        line_width = 1;
+        active_line_width = 1;
       };
 
-      # Vim
-      "vim_mode" = true;
-      "vim" = {
-        "default_mode" = "helix_normal";
-        "use_system_clipboard" = "always";
-        "use_multiline_find" = true;
-        "use_smartcase_find" = true;
+      vim_mode = true;
+      vim = {
+        default_mode = "helix_normal";
+        use_system_clipboard = "always";
+        use_multiline_find = true;
+        use_smartcase_find = true;
       };
 
-      "edit_predictions" = {
-        "disabled_globs" = [ ".env" ];
+      features = {
+        copilot = true;
+        edit_prediction_provider = "copilot";
       };
 
-      "features" = {
-        "copilot" = true;
-        "edit_prediction_provider" = "copilot";
-      };
+      assistant = {
+        enable_experimental_live_diffs = true;
 
-      "assistant" = {
-        "enable_experimental_live_diffs" = true;
-        "default_model" = {
-          "provider" = "copilot_chat";
-          "model" = "claude-3-5-sonnet";
+        default_model = {
+          provider = "copilot_chat";
+          model = "claude-3-5-sonnet";
         };
-        "version" = "2";
+
+        version = "2";
       };
 
-      "load_direnv" = "shell_hook";
+      load_direnv = "shell_hook";
 
-      "terminal" = {
-        "line_height" = "standard";
-        "shell" = "system";
+      terminal = {
+        line_height = "standard";
+        shell.program = "nu";
       };
 
-      "languages" = {
-        "Nix" = {
-          "language_servers" = [
-            "nixd"
-            "!nil"
-          ];
-        };
-        "Python" = {
-          "language_servers" = [
-            "pyright"
-            "ruff"
-          ];
-          "format_on_save" = "on";
-          "formatter" = [
-            {
-              "code_actions" = {
-                "source.fixAll.ruff" = true;
-                "source.organizeImports.ruff" = true;
-              };
-            }
-            {
-              "language_server" = {
-                "name" = "ruff";
-              };
-            }
-          ];
-        };
-      };
+      languages.Nix.language_servers = [
+        "nixd"
+        "!nil"
+      ];
 
-      "lsp" = {
-        "ruff" = {
-          "initialization_options" = {
-            "settings" = {
-              "lineLength" = 80;
-              "lint" = {
-                "extendSelect" = [ "I" ];
-              };
-            };
-          };
-        };
-      };
+      inlay_hints.enabled = true;
 
-      "inlay_hints" = {
-        "enabled" = true;
-      };
-
-      "calls" = {
-        "mute_on_join" = true;
-      };
-
-      "telemetry" = {
-        "diagnostics" = false;
-        "metrics" = false;
+      calls.mute_on_join = true;
+      telemetry = {
+        diagnostics = false;
+        metrics = false;
       };
     };
 
     extensions = [
       "swift"
       "html"
-      "gruvbox-material"
       "toml"
       "zig"
       "ocaml"
+      "nix"
     ];
   };
 }

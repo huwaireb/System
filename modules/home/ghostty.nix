@@ -16,7 +16,7 @@
     installBatSyntax = !config.isDarwin;
 
     settings = {
-      font-family = "Iosevka";
+      font-family = "Iosevka Nerd Font";
       font-size = 24;
 
       theme = "GruvboxDark";

@@ -2,10 +2,12 @@
   homebrew = {
     enable = true;
     casks = [
-      "stats"
-      "ghostty" # not available on nixpkgs for macos
-      "raycast"
-      "whatsapp" # whatsapp-for-macos gives a 404 when downloading the app
+      # See modules/home/ghostty.nix. TL;DR Requires Xcode to build
+      "ghostty"
+
+      # The MacOS version of WhatsApp in nixpkgs, "whatsapp-for-mac"
+      # fails to download with a 404.
+      "whatsapp"
     ];
   };
 }
