@@ -21,7 +21,6 @@ in
     ]
     ++ optionals config.isDarwin [
       stats
-      raycast
       alt-tab-macos
     ];
 

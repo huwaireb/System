@@ -16,7 +16,6 @@ lib.darwinSystem' (
       ../../modules/home
       ../../modules/home/ghostty.nix
       ../../modules/home/zed.nix
-      ../../modules/home/social.nix
     ];
 
     system.defaults.dock.persistent-apps = [
@@ -27,7 +26,7 @@ lib.darwinSystem' (
       { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
       { app = "/Applications/Xcode.app"; }
 
-      { app = "${pkgs.discord}/Applications/Discord.app"; }
+      { app = "/Applications/Discord.app"; }
       { app = "/Applications/WhatsApp.app"; }
 
       { folder = "/Users/rmu/Projects"; }
