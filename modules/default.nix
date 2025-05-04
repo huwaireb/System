@@ -25,7 +25,10 @@ in
       keep-outputs = true;
       keep-derivations = true;
 
-      experimental-features = "nix-command flakes pipe-operators fetch-closure";
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
       extra-platforms = mkIf config.isDarwin [
         "aarch64-darwin"

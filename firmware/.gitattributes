@@ -2,4 +2,4 @@
 *.dtsi linguist-language=C
 *.keymap linguist-language=C
 
-zmk/board/* linguist-vendored
+adv360/board/* linguist-vendored

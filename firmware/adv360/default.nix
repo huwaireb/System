@@ -1,0 +1,4 @@
+{
+  stdenv,
+}:
+stdenv.mkDerivation { }

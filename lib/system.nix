@@ -1,8 +1,6 @@
 { lib, inputs, ... }:
 let
-  specialArgs = {
-    inherit inputs;
-  };
+  specialArgs = { inherit inputs; };
 in
 {
   nixosSystem' =
@@ -20,7 +18,7 @@ in
 
   darwinSystem' =
     module:
-    lib.darwinSystem {
+    inputs.darwin.lib.darwinSystem {
       inherit specialArgs;
       modules = [
         module
