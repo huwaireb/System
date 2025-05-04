@@ -13,26 +13,19 @@
   };
 
   outputs =
-    inputs:
-    { nixpkgs, systems, ... }:
+    inputs@{ nixpkgs, systems, ... }:
     let
       eachSystem = nixpkgs.lib.genAttrs (import systems);
     in
     {
-      packages =
+      packages = eachSystem (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          adv360 = pkgs.callPackage ./adv360 { inherit inputs; };
+          adv360 = pkgs.callPackage ./adv360 { inherit (inputs) zephyr zmk; };
         }
-        |> eachSystem;
+      );
     };
-
-  nixConfig.experimental-features = [
-    "flakes"
-    "nix-command"
-    "pipe-operators"
-  ];
 }

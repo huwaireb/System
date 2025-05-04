@@ -28,6 +28,7 @@ in
       experimental-features = [
         "nix-command"
         "flakes"
+        "pipe-operators"
       ];
 
       extra-platforms = mkIf config.isDarwin [

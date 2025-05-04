@@ -1,0 +1,78 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1746300365,
+        "narHash": "sha256-thYTdWqCRipwPRxWiTiH1vusLuAy0okjOyzRx4hLWh4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f21e4546e3ede7ae34d12a84602a22246b31f7e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "systems": "systems",
+        "zephyr": "zephyr",
+        "zmk": "zmk"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "zephyr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1738456065,
+        "narHash": "sha256-lRAKi/8jZ70N2X00QI/0TpPglRP2O+MyM+2BcnQcPM0=",
+        "owner": "zmkfirmware",
+        "repo": "zephyr",
+        "rev": "0fa4cc26d8b1e5243570ccc0f7f66c4c428d2961",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zmkfirmware",
+        "ref": "v3.5.0+zmk-fixes",
+        "repo": "zephyr",
+        "type": "github"
+      }
+    },
+    "zmk": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746030742,
+        "narHash": "sha256-zSdywqNkTcETftE4sTeBH24dhl61AsL9u0JvAs9rqNA=",
+        "owner": "zmkfirmware",
+        "repo": "zmk",
+        "rev": "f1b944b1efc01805a769cb2b15797c2c611bcc5f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zmkfirmware",
+        "repo": "zmk",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
