@@ -13,7 +13,7 @@
   outputs =
     inputs:
     let
-      lib = import ./lib { inherit inputs lib; };
+      lib = import ./lib inputs;
     in
     {
       darwinConfigurations.moon = import ./hosts/moon lib;

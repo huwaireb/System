@@ -1,31 +1,36 @@
-{ lib, inputs, ... }:
+inputs@{
+  nixpkgs,
+  darwin,
+  home-manager,
+  ...
+}:
 let
   specialArgs = { inherit inputs; };
 in
 {
   nixosSystem' =
     module:
-    lib.nixosSystem {
+    nixpkgs.lib.nixosSystem {
       inherit specialArgs;
       modules = [
         module
         ../modules
         ../modules/nixos
 
-        inputs.home-manager.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
       ];
     };
 
   darwinSystem' =
     module:
-    inputs.darwin.lib.darwinSystem {
+    darwin.lib.darwinSystem {
       inherit specialArgs;
       modules = [
         module
         ../modules
         ../modules/darwin
 
-        inputs.home-manager.darwinModules.home-manager
+        home-manager.darwinModules.home-manager
       ];
     };
 }
