@@ -16,10 +16,11 @@ lib.darwinSystem' (
       ../../modules/home
       ../../modules/home/ghostty.nix
       ../../modules/home/zed.nix
+      ../../modules/home/browser.nix
     ];
 
     system.defaults.dock.persistent-apps = [
-      { app = "/Applications/Safari.app"; }
+      { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
