@@ -83,6 +83,11 @@
         "!nil"
       ];
 
+      languages.Starlark.language_servers = [
+        "buck2-lsp"
+        "!starpls"
+      ];
+
       inlay_hints.enabled = true;
 
       calls.mute_on_join = true;
@@ -99,6 +104,7 @@
       "zig"
       "ocaml"
       "nix"
+      "starlark"
     ];
   };
 }

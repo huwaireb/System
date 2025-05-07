@@ -1,40 +1,52 @@
 {
+  home.sessionVariables.EDITOR = "hx";
   programs.helix = {
     enable = true;
 
-    languages = {
-      language = [
-
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command = "nixfmt";
-        }
-
-        {
-          name = "c";
-          file-types = [
-            "c"
-            "h"
-          ];
-          language-servers = [ "clangd" ];
-          auto-format = true;
-        }
-
-        {
-          name = "cpp";
-          auto-format = true;
-          file-types = [
-            "cpp"
-            "cc"
-            "hh"
-            "hpp"
-            "ccm"
-          ];
-        }
-
-      ];
+    languages.language-server.buck2 = {
+      command = "buck2";
+      args = [ "lsp" ];
     };
+
+    languages.language = [
+      {
+        name = "starlark";
+        auto-format = true;
+        language-servers = [ "buck2" ];
+        file-types = [
+          "bzl"
+          { glob = "BUCK"; }
+          { glob = "BUILD"; }
+        ];
+        formatter.command = "buildifier";
+      }
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "nixfmt";
+      }
+      {
+        name = "c";
+        file-types = [
+          "c"
+          "h"
+        ];
+        language-servers = [ "clangd" ];
+        auto-format = true;
+      }
+
+      {
+        name = "cpp";
+        auto-format = true;
+        file-types = [
+          "cpp"
+          "cc"
+          "hh"
+          "hpp"
+          "ccm"
+        ];
+      }
+    ];
 
     themes.gruvbox_ts = {
       inherits = "gruvbox_dark_soft";
