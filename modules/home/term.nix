@@ -1,15 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (builtins) readFile;
-  inherit (lib) getExe;
-in
+{ pkgs, ... }:
 {
   imports = [
-    ./helix.nix
+    ./shell.nix
     ./vcs.nix
   ];
 
@@ -22,32 +14,13 @@ in
 
     fd
     ripgrep
-    eza
-    sad
-    tealdeer
+
     jq
-    glow
 
     watchman
-    difftastic
 
     nixd
   ];
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "TwoDark";
-      color = "always";
-    };
-  };
-
-  programs.zoxide = {
-    enable = true;
-    package = pkgs.zoxide;
-    options = [ "--cmd cd" ];
-    enableFishIntegration = true;
-  };
 
   programs.fzf = {
     enable = true;
@@ -55,63 +28,22 @@ in
     defaultOptions = [
       "--ansi"
       "--preview-window 'right:60%'"
-      "--preview bat"
     ];
   };
 
-  programs.starship = {
+  programs.z-lua = {
     enable = true;
     enableFishIntegration = true;
-  };
-
-  programs.nushell = {
-    enable = true;
-    configFile.text = readFile ../../config/nu/config.nu;
-  };
-
-  xdg.configFile = {
-    "nushell/zoxide.nu".source = pkgs.runCommand "zoxide.nu" { } ''
-      ${getExe pkgs.zoxide} init nushell --cmd cd > $out
-    '';
-
-    "nushell/ls_colors.txt".source = pkgs.runCommand "ls_colors.txt" { } ''
-      ${getExe pkgs.vivid} generate gruvbox-dark-hard > $out
-    '';
-
-    "nushell/starship.nu".source = pkgs.runCommand "starship.nu" { } ''
-      ${getExe pkgs.starship} init nu > $out
-    '';
-  };
-
-  programs.fish = {
-    enable = true;
-
-    plugins = [
-      {
-        name = "gruvbox";
-        src = pkgs.fishPlugins.gruvbox;
-      }
+    enableAliases = true;
+    options = [
+      "enhanced"
+      "fzf"
+      "once"
     ];
-
-    shellInit = ''
-      set fish_greeting
-    '';
-
-    shellAliases = {
-      cat = "bat";
-      ls = "eza";
-    };
   };
-
-  programs.zsh.enable = true;
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
   };
 }

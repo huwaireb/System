@@ -2,7 +2,7 @@
   homebrew = {
     enable = true;
     casks = [
-      # For some reason needs to update on every open when downloaded using nixkpgs
+      # For some reason needs to update on every open when downloaded using nixpkgs
       "discord"
 
       # Gets outdated real quick, still looking for a better FOSS alternative.

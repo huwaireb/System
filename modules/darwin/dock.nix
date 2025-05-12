@@ -1,4 +1,3 @@
-{ lib }:
 {
   system.defaults.dock = {
     autohide = true;
@@ -9,9 +8,5 @@
     minimize-to-application = true;
 
     orientation = "bottom";
-
-    persistent-apps = lib.mkDefault [
-      { app = "/Applications/Safari.app"; }
-    ];
   };
 }
