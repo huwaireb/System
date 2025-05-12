@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   package = pkgs.emacs;
 in
@@ -24,7 +24,7 @@ in
       ];
   };
 
-  home.sessionVariables.EDITOR = pkgs.writeScriptBin "emacsclient" ''
+  home.sessionVariables.EDITOR = lib.getExe (pkgs.writeScriptBin "emacsclient" ''
     emacsclient -c -a "" "$@"
-  '';
+  '');
 }

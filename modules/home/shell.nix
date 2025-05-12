@@ -4,11 +4,15 @@
   programs.fish = {
     enable = true;
 
-    interactiveShellInit = ''
+    shellInit = ''
       set fish_greeting
       set fish_key_bindings fish_vi_key_bindings 
+
       fish_config theme choose tokyonight
     '';
+
+    functions.fish_prompt = builtins.readFile ./config/fish/prompt.fish;
+    functions.fish_mode_prompt = "";
   };
 
   xdg.configFile."fish/themes/tokyonight.theme".source = pkgs.fetchurl {
