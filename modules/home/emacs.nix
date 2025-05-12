@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 let
   package = pkgs.emacs;
+  inherit (lib) getExe;
 in
 {
   services.emacs = {
@@ -19,12 +20,19 @@ in
         vertico
         consult
         orderless
+        
+        meow
+
         zig-mode
         zig-ts-mode
+
+        nix-mode
+        nix-ts-mode
       ];
   };
 
-  home.sessionVariables.EDITOR = lib.getExe (pkgs.writeScriptBin "emacsclient" ''
+  home.shellAliases.ec = "$EDITOR";
+  home.sessionVariables.EDITOR = getExe (pkgs.writeScriptBin "emacsclient" ''
     emacsclient -c -a "" "$@"
   '');
 }

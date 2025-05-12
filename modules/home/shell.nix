@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  home.shellAliases.ls = "${pkgs.coreutils}/bin/ls --color=auto -aFh --group-directories-first";
+
   programs.zsh.enable = true;
   programs.fish = {
     enable = true;
