@@ -73,7 +73,6 @@ in
         diff-hl # VCS Gutter
         consult-todo
         exec-path-from-shell # Inherit nix environment
-        affe # Fzf
 
         # completion.el
         cape

@@ -1,0 +1,3 @@
+-fobjc-arc
+-fmodules
+-mmacosx-version-min=11.0 

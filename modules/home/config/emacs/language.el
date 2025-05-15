@@ -10,6 +10,21 @@
   :init
   (global-eldoc-mode))
 
+(use-package eglot
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-stay-out-of '(flymake))
+  :config
+  (setq read-process-output-max (* 4 1024 1024)))
+
+(use-package treesit
+  :when (treesit-available-p)
+  :custom (treesit-font-lock-level 4))
+
+(use-package hl-todo
+  :init
+  (global-hl-todo-mode))
+
 (use-package rust-mode
   :mode "\\.rs\\'"
   :hook (rust-mode . eglot-ensure)
@@ -30,19 +45,7 @@
   ;; upstream should derive
   (derived-mode-add-parents 'zig-ts-mode '(zig-mode)))
 
-(use-package eglot
-  :custom
-  (eglot-autoshutdown t)
-  (eglot-stay-out-of '(flymake))
-  :config
-  (setq read-process-output-max (* 4 1024 1024)))
-
-(use-package treesit
-  :when (treesit-available-p)
-  :custom (treesit-font-lock-level 4))
-
-(use-package hl-todo
-  :init
-  (global-hl-todo-mode))
+(use-package objc-mode
+  :hook (objc-mode . eglot-ensure))
 
 ;; language.el ends here

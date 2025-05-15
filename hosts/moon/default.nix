@@ -17,6 +17,7 @@ lib.darwinSystem' (
       ../../modules/home/ghostty.nix
       ../../modules/home/emacs.nix
       ../../modules/home/browser.nix
+      ../../modules/home/activation/wallpaper/default.nix    
     ];
 
     system.defaults.dock.persistent-apps = [
