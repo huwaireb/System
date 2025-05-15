@@ -8,7 +8,11 @@ set -l yellow (set_color --bold yellow)
 
 set -l current_dir "$cyan"(prompt_pwd -D 2)"$normal"
 
-set -l git_info (fish_git_prompt "$blue git:($magenta%s$blue)$normal ")
+set -l git_info ""
+if set -l git_output (fish_git_prompt "$blue git:($magenta%s$blue)$normal ")
+    set git_info "$git_output"
+end
+
 set -l mode_indicator '?'
 
 switch $fish_bind_mode
