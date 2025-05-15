@@ -28,7 +28,7 @@
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
   (blink-cursor-mode 0)
-  (set-fringe-mode 0))
+  (set-fringe-mode 'left-only))
 
 (use-package exec-path-from-shell
   :when (daemonp)
@@ -39,7 +39,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package savehist
-  :config
+  :init
   (savehist-mode))
 
 (use-package minions :init (minions-mode))
@@ -71,7 +71,20 @@
 (use-package marginalia
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
-  :config
+  :init
   (marginalia-mode))
+
+(use-package diff-hl
+  :hook
+  ((dired-mode . diff-hl-dired-mode)
+   (prog-mode . diff-hl-mode)
+   (conf-mode . diff-hl-mode)
+   (magit-post-refresh . diff-hl-magit-post-refresh)))
+
+(use-package which-key
+  :init
+  (which-key-mode))
+
+(use-package magit)
 
 ;; editor.el ends here

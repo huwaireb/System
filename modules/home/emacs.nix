@@ -51,7 +51,7 @@ in
   };
 
   services.emacs = {
-    inherit (config.programs.emacs) enable; 
+    inherit (config.programs.emacs) enable;
     # NOTE: Not sure if it's any use, but I do get the Emacs icon with it when using emacsclient.
     package = writeScriptBin "emacs" ''exec ${final-emacs}/Applications/Emacs.app/Contents/MacOS/Emacs "$@"'';
   };
@@ -62,17 +62,18 @@ in
 
     extraPackages =
       e: with e; [
-        # editor.el   
+        # editor.el
         consult
         marginalia
         embark
         embark-consult
-	minions
-	doom-themes
-	magit
-	diff-hl
-	consult-todo
-	exec-path-from-shell
+        minions
+        doom-themes
+        magit
+        diff-hl # VCS Gutter
+        consult-todo
+        exec-path-from-shell # Inherit nix environment
+        affe # Fzf
 
         # completion.el
         cape
@@ -84,8 +85,8 @@ in
         meow
 
         # language.el
-	envrc
-	
+        envrc
+
         rust-mode
         typst-ts-mode
 

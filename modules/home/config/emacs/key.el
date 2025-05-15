@@ -1,16 +1,56 @@
 ;;; key.el --- Keybindings
 ;;
 
+(defvar-keymap helix/window-map
+  :doc "Helix-style Window Manipulation Keymap"
+  "w" #'other-window
+  "s" #'split-window-below
+  "v" #'split-window-right
+  "q" #'delete-window
+  "o" #'delete-other-windows
+  "h" #'windmove-left
+  "n" #'windmove-down
+  "e" #'windmove-up
+  "i" #'windmove-right
+  "H" #'windmove-swap-states-left
+  "N" #'windmove-swap-states-down
+  "E" #'windmove-swap-states-up
+  "I" #'windmove-swap-states-right)
+
 (use-package meow
+  :demand t
   :config
-  (meow-global-mode)
-  (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
+  (setq meow-cheatsheet-layout
+	meow-cheatsheet-layout-colemak-dh)
+
+  (meow--setup-diff-hl t)
+  (meow--setup-corfu t)
+  (meow--setup-magit t)
+  (meow--setup-eldoc t)
+  (meow--setup-which-key t)
+
+  (keymap-global-set "C-c w" helix/window-map)
+  
   (meow-motion-define-key
    '("e" . meow-prev)
    '("<escape>" . ignore))
-  
+   
   (meow-leader-define-key
-   '("?" . meow-cheatsheet)
+   '("?" . meow-M-x)
+   '("f" . project-find-file)
+   '("F" . consult-fd)
+   '("s" . consult-imenu-multi)
+   '("b" . consult-project-buffer)
+   '("B" . consult-buffer)
+   '("j" . consult-bookmark)
+   '("d" . consult-flymake)
+   '("a" . eglot-code-actions)
+   '("y" . meow-clipboard-save)
+   '("p" . meow-clipboard-yank)
+   '("r" . eglot-rename)
+   '("/" . consult-ripgrep)
+   '("k" . eldoc)
+   '("c" . comment-dwim)
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)
@@ -80,6 +120,7 @@
    '("y" . meow-save)
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("<escape>" . ignore)))
+   '("<escape>" . ignore))
+  (meow-global-mode))
 
 ;; key.el ends here

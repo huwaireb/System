@@ -13,12 +13,12 @@
   :custom
   (vertico-cycle t)
   (vertico-resize t)
- :init
+  :init
   (vertico-mode))
 
 (use-package orderless
   :custom
-  (completion-styles '(orderless basic))
+  (completion-styles '(orderless flex))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 

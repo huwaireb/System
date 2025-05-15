@@ -4,6 +4,12 @@
 (use-package envrc
   :hook (after-init . envrc-global-mode))
 
+(use-package eldoc
+  :custom
+  (eldoc-documentation-strategy #'eldoc-documentation-compose)
+  :init
+  (global-eldoc-mode))
+
 (use-package rust-mode
   :mode "\\.rs\\'"
   :hook (rust-mode . eglot-ensure)
@@ -36,7 +42,7 @@
   :custom (treesit-font-lock-level 4))
 
 (use-package hl-todo
-  :config
+  :init
   (global-hl-todo-mode))
 
 ;; language.el ends here
