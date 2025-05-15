@@ -2,9 +2,8 @@
 ;;
 
 (use-package meow
-  :init
-  (meow-global-mode)
   :config
+  (meow-global-mode)
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
   (meow-motion-define-key
    '("e" . meow-prev)

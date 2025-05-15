@@ -30,12 +30,24 @@
   (blink-cursor-mode 0)
   (set-fringe-mode 0))
 
+(use-package exec-path-from-shell
+  :when (daemonp)
+  :demand t
+  :config
+  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
+
+(use-package savehist
+  :config
+  (savehist-mode))
+
 (use-package minions :init (minions-mode))
 (use-package doom-themes
   :custom
   (doom-themes-enable-bold t)
   (doom-themes-enable-italic t)
-  :init
+  :config
   (load-theme 'doom-tokyo-night t))
 	
 (use-package consult
@@ -59,7 +71,7 @@
 (use-package marginalia
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
-  :init
+  :config
   (marginalia-mode))
 
 ;; editor.el ends here

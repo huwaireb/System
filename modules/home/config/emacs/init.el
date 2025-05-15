@@ -21,4 +21,4 @@
 (load-rel "completion.el")
 (load-rel "language.el")
 
-;;; init.el ends here
+;; init.el ends here

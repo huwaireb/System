@@ -9,13 +9,12 @@
     url = "github:LnL7/nix-darwin";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-
+ 
   outputs =
     inputs:
     let
       lib = import ./lib inputs;
-    in
-    {
+    in {
       darwinConfigurations.moon = import ./hosts/moon lib;
     };
 

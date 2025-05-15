@@ -2,21 +2,18 @@
 ;;
 
 (use-package dabbrev
-  ;; Swap M-/ and C-M-/
   :bind (("M-/" . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
-  :custom
-  (dabbrev-ignored-buffer-modes
-   (append dabbrev-ignored-buffer-modes
-	   '(authinfo-mode doc-view-mode pdf-view-mode tags-table-mode)))
   :config
-  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` "))
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  (dolist (mode '(authinfo-mode doc-view-mode pdf-view-mode tags-table-mode))
+    (add-to-list 'dabbrev-ignored-buffer-modes mode)))
 
 (use-package vertico
   :custom
   (vertico-cycle t)
   (vertico-resize t)
-  :init
+ :init
   (vertico-mode))
 
 (use-package orderless
@@ -38,7 +35,7 @@
 (use-package cape
   :bind ("C-c p" . cape-prefix-map)
   :init
-  (dolist (fn '(cape-dabbrev cape-file cape-elisp-symbol cape-keyword cape-dict))
+  (dolist (fn '(cape-dabbrev cape-file cape-elisp-symbol cape-keyword))
     (add-hook 'completion-at-point-functions fn)))
 
 ;; completion.el ends here
