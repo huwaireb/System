@@ -1,8 +1,7 @@
 {
   homebrew = {
     enable = true;
-
-    onActivation.cleanup = "uninstall";
+    
     global.brewfile = true;
 
     # Get Xcode Apple Store

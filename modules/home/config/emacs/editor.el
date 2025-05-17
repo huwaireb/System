@@ -22,12 +22,15 @@
   (default-frame-alist
    '((font . "Iosevka-18")
      (undecorated . t)
-     (width . 0.9)
-     (height . 0.83)))
+     ;; Almost Maximize
+     (top . 77)
+     (left . 68)
+     (width . 150)
+     (height . 39)))
 
   (display-line-numbers 'relative)
   (inhibit-startup-screen t)
-
+  
   (mode-line-format
    '("%e" 
      mode-line-front-space

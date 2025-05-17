@@ -51,6 +51,7 @@
    '("/" . consult-ripgrep)
    '("k" . eldoc)
    '("c" . comment-dwim)
+   '("v" . magit)
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)
