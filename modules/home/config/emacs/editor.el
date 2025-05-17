@@ -1,7 +1,13 @@
-;;; editor.el --- Emacs
+;;; editor.el --- Emacs -*- lexical-binding: t -*-
 ;;
 
-(use-package emacs
+(use-package magit)
+
+(use-package marginalia :init (marginalia-mode))
+(use-package savehist :ensure nil :init (savehist-mode))
+(use-package which-key :ensure nil :init (which-key-mode))
+
+(use-package emacs :ensure nil
   :custom
   (auto-save-default nil)
   (create-lockfiles nil)
@@ -21,14 +27,34 @@
 
   (display-line-numbers 'relative)
   (inhibit-startup-screen t)
+
+  (mode-line-format
+   '("%e" 
+     mode-line-front-space
+     (:eval (meow-indicator))
+     " "
+     (:propertize "%b" face (:foreground "cyan"))
+     " "
+     (vc-mode vc-mode)
+     " "
+     (:propertize mode-name face (:foreground "yellow"))
+     mode-line-format-right-align
+     (:propertize "%z" face (:foreground "green"))
+     "|"
+     (:propertize "%Z" face (:foreground "green"))
+     "|"
+     (:propertize "%c" face (:foreground "magenta"))
+     "|"
+     (:propertize "%p" face (:foreground "orange"))
+     mode-line-end-spaces))
   :config
   (prefer-coding-system 'utf-8)
   (global-display-line-numbers-mode 'relative)
+  
   (tool-bar-mode 0)
   (menu-bar-mode 0)
   (scroll-bar-mode 0)
-  (blink-cursor-mode 0)
-  (set-fringe-mode 'left-only))
+  (blink-cursor-mode 0))
 
 (use-package exec-path-from-shell
   :when (daemonp)
@@ -38,11 +64,6 @@
     (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 
-(use-package savehist
-  :init
-  (savehist-mode))
-
-(use-package minions :init (minions-mode))
 (use-package doom-themes
   :custom
   (doom-themes-enable-bold t)
@@ -68,23 +89,14 @@
    consult--source-recent-file consult--source-project-recent-file
    :preview-key '(:debounce 0.4 any)))
 
-(use-package marginalia
-  :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
-  :init
-  (marginalia-mode))
-
 (use-package diff-hl
   :hook
   ((dired-mode . diff-hl-dired-mode)
    (prog-mode . diff-hl-mode)
    (conf-mode . diff-hl-mode)
-   (magit-post-refresh . diff-hl-magit-post-refresh)))
-
-(use-package which-key
-  :init
-  (which-key-mode))
-
-(use-package magit)
+   (magit-post-refresh . diff-hl-magit-post-refresh))
+  :custom
+  (diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-type)
+  (diff-hl-draw-borders nil))
 
 ;; editor.el ends here

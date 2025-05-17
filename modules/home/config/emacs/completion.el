@@ -1,7 +1,8 @@
-;;; completion.el --- Completions
+;;; completion.el --- Completions -*- lexical-binding: t -*-
 ;;
 
 (use-package dabbrev
+  :ensure nil
   :bind (("M-/" . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
   :config

@@ -1,4 +1,4 @@
-;;; key.el --- Keybindings
+;;; key.el --- Keybindings -*- lexical-binding: t -*-
 ;;
 
 (defvar-keymap helix/window-map
@@ -121,6 +121,7 @@
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . ignore))
+  
   (meow-global-mode))
 
 ;; key.el ends here

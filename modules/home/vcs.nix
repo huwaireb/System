@@ -17,7 +17,7 @@
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "${config.home.homeDirectory}/.ssh/allowed_signers";
 
-      core.editor = "hx";
+      core.editor = "em";
     };
 
     patdiff.enable = true;

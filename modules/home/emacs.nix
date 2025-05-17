@@ -18,7 +18,7 @@ let
 in
 {
   home.shellAliases.em = toString config.home.sessionVariables.EDITOR;
-  home.sessionVariables.EDITOR = writeScript "emacsclient" ''exec ${getBin final-emacs}/bin/emacsclient -c "$@"'';
+  home.sessionVariables.EDITOR = writeScript "emacsclient" ''exec emacsclient -c "$@"'';
 
   # HACK: We should be able to directly add treesit-grammars to extraPackages in programs.emacs
   xdg.configFile."emacs/tree-sitter".source =
@@ -57,9 +57,10 @@ in
   };
 
   programs.emacs = {
-    enable = true;
+    enable = !config.isDarwin; # TODO: Re-enable when https://github.com/NixOS/nixpkgs/issues/395169 is resolved.
     package = emacs;
 
+    extraConfig = "(setq nix-provides-packages t)";
     extraPackages =
       e: with e; [
         # editor.el

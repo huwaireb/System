@@ -25,7 +25,7 @@ lib.darwinSystem' (
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
-      { app = "${pkgs.emacs}/Applications/Emacs.app"; }
+      { app = "/Applications/Emacs.app"; }
       { app = "/Applications/Xcode.app"; }
 
       { app = "/Applications/Discord.app"; }

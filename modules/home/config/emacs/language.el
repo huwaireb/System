@@ -1,23 +1,22 @@
-;;; language.el --- PL Modes
+;;; language.el --- PL Modes -*- lexical-binding: t -*-
 ;;
 
-(use-package envrc
-  :hook (after-init . envrc-global-mode))
+(use-package envrc :hook (after-init . envrc-global-mode))
 
-(use-package eldoc
+(use-package eldoc :ensure nil
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose)
   :init
   (global-eldoc-mode))
 
-(use-package eglot
+(use-package eglot :ensure nil
   :custom
   (eglot-autoshutdown t)
   (eglot-stay-out-of '(flymake))
   :config
   (setq read-process-output-max (* 4 1024 1024)))
 
-(use-package treesit
+(use-package treesit :ensure nil
   :when (treesit-available-p)
   :custom (treesit-font-lock-level 4))
 
@@ -45,7 +44,7 @@
   ;; upstream should derive
   (derived-mode-add-parents 'zig-ts-mode '(zig-mode)))
 
-(use-package objc-mode
+(use-package objc-mode :ensure nil
   :hook (objc-mode . eglot-ensure))
 
 ;; language.el ends here
