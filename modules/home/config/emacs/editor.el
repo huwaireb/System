@@ -3,9 +3,13 @@
 
 (use-package magit)
 
-(use-package marginalia :init (marginalia-mode))
-(use-package savehist :ensure nil :init (savehist-mode))
-(use-package which-key :ensure nil :init (which-key-mode))
+(use-package marginalia :hook (after-init . marginalia-mode))
+
+(use-package savehist :ensure nil
+  :hook (after-init . savehist-mode))
+
+(use-package which-key :ensure nil
+  :hook (after-init . which-key-mode))
 
 (use-package emacs :ensure nil
   :custom
@@ -21,7 +25,6 @@
 
   (default-frame-alist
    '((font . "Iosevka-18")
-     (undecorated . t)
      ;; Almost Maximize
      (top . 77)
      (left . 68)

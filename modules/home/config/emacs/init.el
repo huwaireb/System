@@ -37,7 +37,12 @@
   (progn
     (message "Loading file %s..." path)
     (load (expand-file-name path (file-name-directory (or load-file-name buffer-file-name))))))
- 
+
+(use-package server :ensure nil
+  :defer 1
+  :config
+  (unless (server-running-p) (server-start)))
+
 (load-rel "editor.el")
 (load-rel "key.el")
 (load-rel "completion.el")

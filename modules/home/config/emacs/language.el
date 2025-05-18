@@ -6,8 +6,7 @@
 (use-package eldoc :ensure nil
   :custom
   (eldoc-documentation-strategy #'eldoc-documentation-compose)
-  :init
-  (global-eldoc-mode))
+  :hook (after-init . global-eldoc-mode))
 
 (use-package eglot :ensure nil
   :custom
@@ -17,12 +16,11 @@
   (setq read-process-output-max (* 4 1024 1024)))
 
 (use-package treesit :ensure nil
-  :when (treesit-available-p)
+  :requires treesit
   :custom (treesit-font-lock-level 4))
 
 (use-package hl-todo
-  :init
-  (global-hl-todo-mode))
+  :hook (after-init . global-hl-todo-mode))
 
 (use-package rust-mode
   :mode "\\.rs\\'"

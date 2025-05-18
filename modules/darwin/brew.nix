@@ -13,8 +13,6 @@
       {
         name = "emacs-plus@31";
         args = [ "with-imagemagick" ];
-        start_service = true;
-        restart_service = true;
       }
     ];
 

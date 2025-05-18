@@ -1,6 +1,6 @@
 lib:
 lib.darwinSystem' (
-  { pkgs, ... }:
+  { config, pkgs, ... }:
   {
     imports = [
       ../../modules/home.nix
@@ -25,7 +25,7 @@ lib.darwinSystem' (
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
-      { app = "/Applications/Emacs.app"; }
+      { app = "${config.homebrew.brewPrefix}/../opt/emacs-plus@31/Emacs.app"; }
       { app = "/Applications/Xcode.app"; }
 
       { app = "/Applications/Discord.app"; }

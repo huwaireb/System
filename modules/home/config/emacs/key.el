@@ -1,35 +1,37 @@
 ;;; key.el --- Keybindings -*- lexical-binding: t -*-
 ;;
 
-(defvar-keymap helix/window-map
-  :doc "Helix-style Window Manipulation Keymap"
-  "w" #'other-window
-  "s" #'split-window-below
-  "v" #'split-window-right
-  "q" #'delete-window
-  "o" #'delete-other-windows
-  "h" #'windmove-left
-  "n" #'windmove-down
-  "e" #'windmove-up
-  "i" #'windmove-right
-  "H" #'windmove-swap-states-left
-  "N" #'windmove-swap-states-down
-  "E" #'windmove-swap-states-up
-  "I" #'windmove-swap-states-right)
+
+(use-package windmove :ensure nil
+  ;; HACK: bind-keymap doesn't work with meow, see: https://github.com/meow-edit/meow/issues/250
+  :config
+  (defvar-keymap helix/window-map
+    :doc "Window Manipulation Keymap"
+    "w" #'other-window
+    "s" #'split-window-below
+    "v" #'split-window-right
+    "q" #'delete-window
+    "o" #'delete-other-windows
+    "h" #'windmove-left 
+    "n" #'windmove-down
+    "e" #'windmove-up
+    "i" #'windmove-right
+    "H" #'windmove-swap-states-left
+    "N" #'windmove-swap-states-down
+    "E" #'windmove-swap-states-up
+    "I" #'windmove-swap-states-right)
+
+  (keymap-global-set "C-c w" helix/window-map))
 
 (use-package meow
+  :hook (after-init . meow-global-mode)
   :demand t
   :config
-  (setq meow-cheatsheet-layout
-	meow-cheatsheet-layout-colemak-dh)
-
   (meow--setup-diff-hl t)
   (meow--setup-corfu t)
   (meow--setup-magit t)
   (meow--setup-eldoc t)
   (meow--setup-which-key t)
-
-  (keymap-global-set "C-c w" helix/window-map)
   
   (meow-motion-define-key
    '("e" . meow-prev)
@@ -64,7 +66,7 @@
    '("0" . meow-digit-argument))
 
   (meow-normal-define-key
-   '("1" . meow-expand-1)
+  '("1" . meow-expand-1)
    '("2" . meow-expand-2)
    '("3" . meow-expand-3)
    '("4" . meow-expand-4)
@@ -121,8 +123,6 @@
    '("y" . meow-save)
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("<escape>" . ignore))
-  
-  (meow-global-mode))
+   '("<escape>" . ignore)))
 
 ;; key.el ends here
