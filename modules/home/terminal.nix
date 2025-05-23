@@ -12,6 +12,8 @@ in
       ripgrep
 
       jq
+
+      pandoc
     ]
     ++ lib.optionals is-desktop [
       nixd

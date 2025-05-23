@@ -18,46 +18,70 @@
         eglot-autoshutdown t                     ; Shutdown LSP server when done
         eglot-stay-out-of '(flymake))            ; Let Flymake handle diagnostics
 
-;; Eglot keybindings
-(global-set-key (kbd "C-c a") #'eglot-code-actions)
-(global-set-key (kbd "C-c r") #'eglot-rename)
-(global-set-key (kbd "C-c k") #'eldoc)
+(keymap-global-set "C-c a" 'eglot-code-actions)
+(keymap-global-set "C-c r" 'eglot-rename)
+(keymap-global-set "C-c k" 'eldoc)
 
 ;; Treesit configuration
-(unless (treesit-available-p)
-  (error "Tree-sitter support is required but not available in this Emacs build"))
-
 (setopt treesit-font-lock-level 4)  ; Maximum syntax highlighting level
 
 ;; Line Numbers
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
-;; File associations for programming modes
-(dolist (assoc '(("\\.rs\\'" . rust-mode)
-                 ("\\.nix\\'" . nix-ts-mode)
-                 ("\\.zig\\'" . zig-ts-mode)
-                 ("\\.zon\\'" . zig-ts-mode)
-                 ("\\.m\\'" . objc-mode)))
-  (add-to-list 'auto-mode-alist assoc))
-
 ;; Rust mode configuration
+(autoload 'rust-mode "rust-mode"
+  "Major mode for Rust programming" t)
+
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
 (with-eval-after-load 'rust-mode
   (add-hook 'rust-mode-hook 'eglot-ensure)
   (setopt rust-mode-treesitter-derive t))
 
 ;; Nix mode configuration
+(autoload 'nix-ts-mode "nix-ts-mode"
+  "Major mode for editing nix expressions" t)
+
+(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
+
 (with-eval-after-load 'nix-ts-mode
   (add-hook 'nix-ts-mode-hook 'eglot-ensure))
 
 ;; Zig mode configuration
+(autoload 'zig-ts-mode "zig-ts-mode"
+  "Major mode for Zig programming" t)
+
+(add-to-list 'auto-mode-alist '("\\.\\(zig\\|zon\\)\\'" . zig-ts-mode))
+
 (with-eval-after-load 'zig-ts-mode
   (add-hook 'zig-ts-mode-hook 'eglot-ensure)
   (derived-mode-add-parents 'zig-ts-mode '(zig-mode)))
 
 ;; Objective-C mode configuration
+(autoload 'objc-mode "objc-mode"
+  "Major mode for Objective-C programming" t)
+
+(add-to-list 'auto-mode-alist '("\\.m\\'" . objc-mode))
+
 (with-eval-after-load 'objc-mode
   (add-hook 'objc-mode-hook 'eglot-ensure))
+
+;; Markdown mode configuration
+(setopt markdown-command "pandoc")
+
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+
+(add-to-list 'auto-mode-alist '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+
+(autoload 'gfm-mode "markdown-mode"
+  "Major mode for editing GitHub Flavored Markdown files" t)
+
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
+(with-eval-after-load 'markdown-mode
+  (keymap-set markdown-mode-map "C-c C-e" 'markdown-do))
 
 (provide 'rm-code)
 ;;; rm-code.el ends here

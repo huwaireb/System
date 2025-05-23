@@ -1,5 +1,6 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
+  inherit (pkgs) writeScript;
   cfg = config.programs.emacs;
 in
 {
@@ -93,11 +94,10 @@ in
     e.zig-ts-mode
     e.swift-mode
     e.swift-ts-mode
+    e.markdown-mode
     e.treesit-grammars.with-all-grammars
   ];
 
-  services.emacs = {
-    inherit (cfg) enable;
-    defaultEditor = true;
-  };
+  services.emacs = { inherit (cfg) enable; };
+  home.sessionVariables.EDITOR = writeScript "emacsclient" ''${cfg.finalPackage}/bin/emacsclient -c "$@"'';
 }
