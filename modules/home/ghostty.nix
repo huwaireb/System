@@ -4,16 +4,22 @@
   config,
   ...
 }:
+let
+  inherit (pkgs) stdenv writeScriptBin;
+
+  is-desktop = config.type == "desktop";
+  is-darwin = stdenv.hostPlatform.isDarwin;
+in
 {
   programs.ghostty = {
-    enable = true;
+    enable = is-desktop;
 
     # Don't actually install Ghostty if we are on Darwin.
     # Unavailable because Ghostty uses Xcode and Swift is behind a major release in nixpkgs.
-    package = lib.mkIf config.isDarwin (pkgs.writeScriptBin "not-ghostty" "");
+    package = lib.mkIf is-darwin (writeScriptBin "not-ghostty" "");
 
     # Bat syntax points to emptyDirectory.
-    installBatSyntax = !config.isDarwin;
+    installBatSyntax = !is-darwin;
 
     settings = {
       font-family = "Iosevka Nerd Font";
@@ -30,10 +36,9 @@
 
       macos-non-native-fullscreen = "visible-menu";
       macos-option-as-alt = "left";
+      macos-titlebar-style = "tabs";
 
       mouse-hide-while-typing = true;
-
-      macos-titlebar-style = "tabs";
 
       window-colorspace = "display-p3";
 

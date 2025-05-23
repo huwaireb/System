@@ -1,6 +1,5 @@
 # System
-A flaked configuration for MacOS using Nix with nix-darwin and home-manager.
+A system configuration for MacOS using Nix with tools and utilities.
 
 ## Attributions
-I recently rewrote the config before making it public, and in doing so taking a lot of inspiration from the following repositories:
 + [RGBCube](https://github.com/RGBCube)'s awesome [Nix Config Collection (NCC)](https://github.com/RGBCube/NCC)

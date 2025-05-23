@@ -1,18 +1,14 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 let
-  inherit (pkgs.stdenv) hostPlatform;
-  inherit (lib) mkOption;
-
-  mkConst =
-    default:
-    mkOption {
-      inherit default;
-      readOnly = true;
-    };
+  inherit (lib) types;
 in
 {
-  options = {
-    isLinux = mkConst hostPlatform.isLinux;
-    isDarwin = mkConst hostPlatform.isDarwin;
+  options.type = lib.mkOption {
+    type = types.enum [
+      "desktop"
+      "server"
+    ];
+    default = "server";
+    description = "The type of host system";
   };
 }

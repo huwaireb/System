@@ -1,39 +1,35 @@
-lib:
-lib.darwinSystem' (
-  { config, pkgs, ... }:
-  {
-    imports = [
-      ../../modules/home.nix
-      ../../modules/darwin/brew.nix
-    ];
+{ pkgs, ... }:
+let
+  inherit (pkgs) brave fish;
+in
+{
+  imports = [ ./brew.nix ];
 
-    nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.hostPlatform = "aarch64-darwin";
+  networking = {
+    hostName = "rmu";
+    computerName = "moon";
+  };
 
-    networking.hostName = "rmu";
-    networking.computerName = "moon";
+  home-manager.users.rmu = import ./home.nix;
 
-    home-manager.users.rmu.imports = [
-      ../../modules/home
-      ../../modules/home/ghostty.nix
-      ../../modules/home/emacs.nix
-      ../../modules/home/browser.nix
-      ../../modules/home/activation/wallpaper/default.nix    
-    ];
+  system.primaryUser = "rmu";
+  users.users.rmu = {
+    description = "Rashid Almheiri";
+    home = "/Users/rmu";
+    shell = fish;
+  };
 
-    system.defaults.dock.persistent-apps = [
-      { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
+  system = {
+    stateVersion = 5;
+    defaults.dock.persistent-apps = [
+      { app = "${brave}/Applications/Brave Browser.app"; }
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
-      { app = "${config.homebrew.brewPrefix}/../opt/emacs-plus@31/Emacs.app"; }
-      { app = "/Applications/Xcode.app"; }
 
       { app = "/Applications/Discord.app"; }
       { app = "/Applications/WhatsApp.app"; }
-
-      { folder = "/Users/rmu/Projects"; }
     ];
-
-    system.stateVersion = 5;
-  }
-)
+  };
+}

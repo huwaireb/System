@@ -1,0 +1,18 @@
+*
+
+!.gitignore
+
+# Include directories by default
+!*/
+
+# Documentation
+!*.md
+
+# Emacs per-host config
+!*.el
+
+# Nix per-host config
+!*.nix
+
+# Host assets
+!*.jpg

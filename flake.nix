@@ -1,26 +1,42 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-  inputs.home-manager = {
-    url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs";
+  nixConfig = {
+    flake-registry = "";
+
+    show-trace = true;
+    lazy-trees = true;
+    warn-dirty = false;
+
+    experimental-features = [
+      "flakes"
+      "nix-command"
+      "pipe-operators"
+    ];
   };
 
-  inputs.darwin = {
-    url = "github:LnL7/nix-darwin";
-    inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    nix.url = "github:DeterminateSystems/nix-src";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
- 
+
   outputs =
     inputs:
     let
       lib = import ./lib inputs;
-    in {
-      darwinConfigurations.moon = import ./hosts/moon lib;
+    in
+    {
+      darwinConfigurations.moon = lib.darwinSystem' {
+        type = "desktop";
+        imports = [ ./hosts/moon ];
+      };
     };
-
-  nixConfig.experimental-features = [
-    "flakes"
-    "nix-command"
-    "pipe-operators"
-  ];
 }

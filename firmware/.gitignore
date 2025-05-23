@@ -1,0 +1,21 @@
+*
+
+!.gitignore
+!.gitattributes
+
+# Include directories by default
+!*/
+
+# Documentation
+!README.md
+
+# Flake, derivations
+!flake.nix
+!flake.lock
+
+# Firmware Packaging and Tooling
+!default.nix
+!package.nix
+
+# ZMK Keymaps and Device Tree files
+!adv360/**/*.{keymap,.dst,.dtsi}

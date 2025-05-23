@@ -1,0 +1,16 @@
+*
+
+!.gitignore
+
+!home/
+!emacs/
+!darwin/
+!nixos/
+
+!*.nix
+
+# Emacs Modules
+!emacs/**/*.el
+
+# Home Modules
+!home/services

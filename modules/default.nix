@@ -2,23 +2,30 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
-  inherit (lib) mkIf;
+  inherit (pkgs) stdenv;
 in
 {
   imports = [ ./system.nix ];
 
-  time.timeZone = "Asia/Dubai";
+  time.timeZone = lib.mkDefault "Asia/Dubai";
+
   programs.fish.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    sharedModules = [ { inherit (config) type; } ];
+  };
 
   nix = {
     enable = true;
-    package = pkgs.nixVersions.nix_2_28;
+    package = inputs.nix.packages.${pkgs.system}.default;
 
+    channel.enable = false;
     optimise.automatic = true;
 
     settings = {
@@ -31,14 +38,9 @@ in
         "pipe-operators"
       ];
 
-      extra-platforms = mkIf config.isDarwin [
+      extra-platforms = lib.mkIf stdenv.isDarwin [
         "aarch64-darwin"
         "x86_64-darwin"
-      ];
-
-      trusted-users = [
-        "root"
-        "@wheel"
       ];
 
       substituters = [
@@ -48,6 +50,11 @@ in
 
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+
+      trusted-users = [
+        "root"
+        "@wheel"
       ];
     };
   };

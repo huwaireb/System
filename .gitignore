@@ -1,2 +1,26 @@
-# Nix default derivation out directory
-result
+*
+
+!.gitignore
+
+# Top-level directories are accounted for
+# !*/
+
+# Documentation
+!README.md
+!LICENSE.md
+
+# Flake +sub-directories nix files
+!*.nix
+!flake.lock
+
+# System Hosts
+!hosts/
+
+# Nix Utilities
+!lib/
+
+# Nix Modules
+!modules/
+
+# ZMK Devices
+!firmware/

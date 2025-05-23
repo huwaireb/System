@@ -1,21 +1,11 @@
 {
   homebrew = {
     enable = true;
-    
+
     global.brewfile = true;
 
-    # Get Xcode Apple Store
+    # Get Xcode from the Apple Store
     masApps.Xcode = 497799835;
-
-    taps = [ "d12frosted/emacs-plus" ];
-    brews = [
-      # NativeComp is broken in nixpkgs for darwin 15.4
-      {
-        name = "emacs-plus@31";
-        args = [ "with-imagemagick" ];
-      }
-    ];
-
     casks = [
       # For some reason needs to update on every open when downloaded using nixpkgs
       "discord"

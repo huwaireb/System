@@ -1,26 +1,22 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  is-desktop = config.type == "desktop";
+in
 {
-  imports = [
-    ./shell.nix
-    ./vcs.nix
-  ];
+  home.packages =
+    with pkgs;
+    [
+      sqlite
 
-  home.packages = with pkgs; [
-    pciutils
+      fd
+      ripgrep
 
-    nixfmt-rfc-style
-
-    sqlite
-
-    fd
-    ripgrep
-
-    jq
-
-    watchman
-
-    nixd
-  ];
+      jq
+    ]
+    ++ lib.optionals is-desktop [
+      nixd
+      nixfmt-rfc-style
+    ];
 
   programs.fzf = {
     enable = true;
@@ -43,7 +39,7 @@
   };
 
   programs.direnv = {
-    enable = true;
+    enable = is-desktop;
     nix-direnv.enable = true;
   };
 }

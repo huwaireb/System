@@ -15,7 +15,6 @@ in
       modules = [
         module
         ../modules
-        ../modules/nixos
 
         home-manager.nixosModules.home-manager
       ];

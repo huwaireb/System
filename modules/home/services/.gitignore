@@ -1,0 +1,11 @@
+*
+
+!.gitignore
+!default.nix
+!package.nix
+
+# Directories
+!*/
+
+# Wallpaper Service
+!wallpaper/**/*.{c,m,h}

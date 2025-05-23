@@ -1,9 +1,11 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+let
+  is-desktop = config.type == "desktop";
+in
 {
   programs.chromium = {
-    enable = true;
+    enable = is-desktop;
     package = pkgs.brave;
-
     extensions = [
       # Bitwarden
       { id = "nngceckbapebfimnlniiiahkandclblb"; }
@@ -13,6 +15,9 @@
 
       # File Icons for GitHub
       { id = "ficfmibkjjnpogdcfhfokmihanoldbfe"; }
+
+      # Surfingkeys
+      { id = "gfbliohnnapiefjpjlpjnehglfpaknnc"; }
     ];
   };
 }
