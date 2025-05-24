@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (pkgs) writeScript;
   cfg = config.programs.emacs;
 in
 {
-  xdg.configFile."emacs/early-init.el".text = ''
+  xdg.configFile."emacs/early-init.el".text = lib.optionalString cfg.enable ''
     ;;; early-init.el --- Emacs Startup Options -*- lexical-binding: t -*-
 
     ;;; References:
@@ -23,7 +23,7 @@ in
     ;; collect once on startup.  We'll reset it later, in this file.  Not
     ;; resetting it will cause stuttering/freezes.
     (setopt gc-cons-threshold most-positive-fixnum ; 2^61 bytes
-          gc-cons-percentage 0.6)
+            gc-cons-percentage 0.6)
 
     ;; The command-line option ‘-batch’ makes Emacs to run noninteractively.
     ;; In noninteractive sessions, prioritize non-byte-compiled source files to
@@ -48,54 +48,51 @@ in
     ;; non-focused windows.
     (setopt cursor-in-non-selected-windows nil)
 
-    ;; Prevent Emacs from automatically initializing packages at startup.  This
-    ;; allows the main init file to handle package initialization manually,
-    ;; providing more control over when and how packages are loaded.
-    ;;(setopt package-enable-at-startup nil)
-
     ;; Replace startup message with init-time.
     (fset 'display-startup-echo-area-message
           (lambda () (message (concat "Loaded config in " (emacs-init-time)))))
 
-    (add-to-list 'load-path "${./emacs}")
+    ;; Load our modules
+    (add-to-list 'load-path "${assert lib.assertMsg (lib.versionAtLeast cfg.package.version "29.0") "Requires emacs 29"; ../emacs}") 
     ;; early-init.el ends here.
   '';
 
   programs.emacs.extraPackages = e: [
-    # Interface
-    e.consult
-    e.marginalia
-    e.embark
-    e.embark-consult
-    e.vertico
-
-    # Version Control
-    e.magit
-    e.diff-hl
-
-    # Defaults
-    e.exec-path-from-shell
+    # Code
+    e.apheleia
+    e.envrc
+    e.hl-todo
+    e.markdown-mode
+    e.nix-mode
+    e.nix-ts-mode
+    e.rust-mode
+    e.swift-mode
+    e.swift-ts-mode
+    e.treesit-grammars.with-all-grammars
+    e.zig-mode
+    e.zig-ts-mode
 
     # Complete
     e.cape
     e.corfu
     e.orderless
 
+    # Defaults
+    e.exec-path-from-shell
+
     # Edit
     e.meow
 
-    # Code
-    e.envrc
-    e.hl-todo
-    e.rust-mode
-    e.nix-mode
-    e.nix-ts-mode
-    e.zig-mode
-    e.zig-ts-mode
-    e.swift-mode
-    e.swift-ts-mode
-    e.markdown-mode
-    e.treesit-grammars.with-all-grammars
+    # Interface
+    e.consult
+    e.embark
+    e.embark-consult
+    e.marginalia
+    e.vertico
+
+    # Version Control
+    e.diff-hl
+    e.magit
   ];
 
   services.emacs = { inherit (cfg) enable; };

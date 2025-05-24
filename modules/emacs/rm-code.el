@@ -6,9 +6,9 @@
 (require 'hl-todo)
 
 ;; Global modes
-(envrc-global-mode 1)    ; Environment management
-(global-eldoc-mode 1)    ; Documentation display
-(global-hl-todo-mode 1)  ; Highlight TODOs
+(envrc-global-mode +1)    ; Environment management
+(global-eldoc-mode +1)    ; Documentation display
+(global-hl-todo-mode +1)  ; Highlight TODOs
 
 ;; Eldoc configuration
 (setopt eldoc-documentation-strategy #'eldoc-documentation-compose)

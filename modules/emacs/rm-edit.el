@@ -1,14 +1,29 @@
 ;;; rm-edit.el --- Keybindings for Editing -*- lexical-binding: t -*-
-(require 'windmove)
 (require 'meow)
+(require 'windmove)
+
+;; Enabling global modes
+(meow-global-mode +1) ; Modal Editing 
+
+;; Sane Opts
+(setopt tab-always-indent 'complete                                             ; Make TAB key indent or complete based on context
+        text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
+        read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
 
 ;; --- Window Management Keybindings ---
+(defun rm/split-window-below ()
+  (interactive)
+  (select-window (split-window-below)))
+
+(defun rm/split-window-right ()
+  (interactive)
+  (select-window (split-window-right)))
 
 (defvar-keymap rm/window-map
   :doc "Window manipulation keymap inspired by Helix"
   "w" #'other-window
-  "s" #'split-window-below
-  "v" #'split-window-right
+  "s" #'rm/split-window-below
+  "v" #'rm/split-window-right
   "q" #'delete-window
   "o" #'delete-other-windows
   "h" #'windmove-left
@@ -23,10 +38,7 @@
 (keymap-global-set "C-c w" rm/window-map)
 
 ;; --- Meow Modal Editing Keybindings ---
-
-(add-hook 'after-init-hook #'meow-global-mode)
-
-(defun meow-redo ()
+(defun rm/meow-redo ()
   "Cancel current selection then redo using Emacs' undo-redo."
   (interactive)
   (when (region-active-p)
@@ -47,7 +59,9 @@
 (meow-leader-define-key
  '("?" . meow-M-x)
  '("y" . meow-clipboard-save)
- '("p" . meow-clipboard-yank))
+ '("p" . meow-clipboard-yank)
+ '("c" . comment-dwim))
+
 (rm/meow-bind-digit-arguments #'meow-leader-define-key)
 
 ;; Normal mode keybindings
@@ -89,14 +103,13 @@
  '("S" . meow-open-above)
  '("A" . meow-open-below)
  '("c" . meow-change)
- '("x" . meow-delete)
+ '("x" . meow-kill)
  '("X" . meow-backward-delete)
- '("k" . meow-kill)
  '("r" . meow-replace)
  '("p" . meow-yank)
  '("y" . meow-save)
  '("u" . meow-undo)
- '("U" . meow-redo)
+ '("U" . rm/meow-redo)
  '("j" . meow-join))
 
 ;; Navigation

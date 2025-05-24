@@ -1,36 +1,36 @@
 ;;; rm-defaults.el --- Default Emacs Settings -*- lexical-binding: t -*-
-(require 'savehist)
-(require 'exec-path-from-shell)
+(require 'savehist) 
 
-;; General Emacs settings
-(setopt auto-save-default nil
-        create-lockfiles nil
-        ring-bell-function 'ignore
-        use-dialog-box nil
-        delete-by-moving-to-trash t
-        tab-always-indent 'complete
-        text-mode-ispell-word-completion nil
-        read-extended-command-predicate #'command-completion-default-include-p
-        default-frame-alist '((font . "Iosevka-18")
-                             (top . 77)
-                             (left . 68)
-                             (width . 150)
-                             (height . 39))
-        display-line-numbers 'relative
-        inhibit-startup-screen t)
+;; Enabling global modes
+(savehist-mode +1) ; Persist minibuffer and command history across session
 
-(global-display-line-numbers-mode 1)
+;; Configuring file and buffer behavior
+(setopt auto-save-default nil        ; Disable auto-saving
+        create-lockfiles nil         ; Prevent creation of lockfiles to avoid clutter
+        delete-by-moving-to-trash t) ; Move deleted files to system trash
 
-;; Comment keybinding
-(keymap-global-set "C-c c" 'comment-dwim)
+;; Customizing user interface
+(setopt ring-bell-function 'ignore      ; Suppress audible bell for quieter operation
+        use-dialog-box nil              ; Avoid GUI dialog boxes
+        inhibit-startup-screen t        ; Skip startup screen for faster launch
+        display-line-numbers 'relative) ; Show line numbers as relative
 
-;; Savehist configuration
-(savehist-mode 1)
+;; Defining default frame appearance
+(setopt default-frame-alist   
+        '((font . "Iosevka-18")
+          (top . 77)            
+          (left . 68)      
+          (width . 150)        
+          (height . 39)))  
 
-;; Exec-path-from-shell configuration
-(dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
-  (add-to-list 'exec-path-from-shell-variables var))
-(exec-path-from-shell-initialize)
+;; Setting up shell environment integration
+(when (or (daemonp) (memq window-system '(mac ns x)))
+  (require 'exec-path-from-shell)                       ; Load shell environment sync library
+  (setopt exec-path-from-shell-variables
+          '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG"
+            "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH")) ; Sync key shell variables
+  (exec-path-from-shell-initialize))                    ; Initialize shell environment
 
 (provide 'rm-defaults)
 ;;; rm-defaults.el ends here
+

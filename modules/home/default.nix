@@ -7,9 +7,10 @@
 {
   imports = [
     ../system.nix
-    ../emacs.nix
 
+    ./emacs.nix
     ./gpg.nix
+    ./ssh.nix
     ./terminal.nix
     ./shell.nix
     ./version-control.nix

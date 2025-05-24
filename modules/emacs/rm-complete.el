@@ -6,11 +6,11 @@
 (require 'cape)
 
 ;; Dabbrev configuration
-(global-set-key (kbd "M-/") #'dabbrev-completion)
-(global-set-key (kbd "C-M-/") #'dabbrev-expand)
+(keymap-global-set "M-/" 'dabbrev-completion)
+(keymap-global-set "C-M-/" 'dabbrev-expand)
 (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
-(dolist (mode '(authinfo-mode doc-view-mode pdf-view-mode tags-table-mode))
-  (add-to-list 'dabbrev-ignored-buffer-modes mode))
+(setopt dabbrev-ignored-buffer-modes
+        '(authinfo-mode doc-view-mode pdf-view-mode tags-table-mode))
 
 ;; Orderless configuration
 (setopt completion-styles '(orderless flex)
@@ -24,11 +24,17 @@
         corfu-auto-delay 0.2)
 (global-corfu-mode)
 (corfu-history-mode)
+(corfu-popupinfo-mode)
 
 ;; Cape configuration
-(global-set-key (kbd "C-c p") #'cape-prefix-map)
-(dolist (fn '(cape-dabbrev cape-file cape-elisp-symbol cape-keyword))
-  (add-hook 'completion-at-point-functions fn))
+(keymap-global-set "C-c p" 'cape-prefix-map)
+
+(defun rm/setup-cape-completions ()
+    (dolist (fn '(cape-dabbrev cape-file cape-elisp-symbol cape-keyword))
+      (add-hook 'completion-at-point-functions fn)))
+
+(add-hook 'prog-mode-hook #'rm/setup-cape-completions)
+(add-hook 'text-mode-hook #'rm/setup-cape-completions)
 
 (provide 'rm-complete)
 ;;; rm-complete.el ends here

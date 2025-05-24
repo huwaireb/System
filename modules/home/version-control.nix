@@ -9,8 +9,8 @@
     patdiff.enable = true;
 
     signing = {
-       key = "0xB00AF30F7E1C2FAF";
-       format = "openpgp";
+       key = "~/.ssh/id";
+       format = "ssh";
        signByDefault = true;
     };
 
