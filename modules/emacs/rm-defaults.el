@@ -21,7 +21,7 @@
 (setopt ring-bell-function 'ignore      ; Suppress audible bell for quieter operation
         use-dialog-box nil              ; Avoid GUI dialog boxes
         inhibit-startup-screen t        ; Skip startup screen for faster launch
-        display-line-numbers 'relative) ; Show line numbers as relative
+        )
 
 ;; Defining default frame appearance (TODO: Calculate almost maximum based on resolution)
 (setopt default-frame-alist   

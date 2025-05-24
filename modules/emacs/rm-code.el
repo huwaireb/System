@@ -27,10 +27,6 @@
 ;; Treesit configuration
 (setopt treesit-font-lock-level 4) ; Maximum syntax highlighting level
 
-;; Line Numbers
-(with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
-
 ;; C(++) mode configuration
 (autoload 'c-ts-mode "c-ts-mode"
   "Major mode for C programming +treesit" t)

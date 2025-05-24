@@ -8,27 +8,34 @@
 (require 'embark)
 (require 'embark-consult)
 
+;; Appearance
+(load-theme 'modus-vivendi t)
+
+;; Enable global modes
+(which-key-mode +1)
+(marginalia-mode +1)
+(display-line-numbers-mode +1)
+
+;; Fringe
+(set-face-attribute 'fringe nil :background nil)
+
+;; Line Numbers
+(custom-set-faces
+ '(line-number ((t (:background nil :foreground "#666666"))))
+ '(line-number-current-line ((t (:background nil :foreground "#999999")))))
+
+(setopt display-line-numbers-type 'relative
+        display-line-numbers-width 3
+        display-line-numbers-widen t
+        display-line-numbers-current-absolute t)
+
 ;; Vertico configuration
 (setopt vertico-cycle t
         vertico-resize t)
+
 (vertico-mode)
 
-;; Marginalia configuration
-(add-hook 'after-init-hook #'marginalia-mode)
-
-;; Which-key configuration
-(add-hook 'after-init-hook #'which-key-mode)
-
-;; Doom-themes configuration
-(load-theme 'modus-vivendi t)
-
 ;; Consult configuration
-(add-hook 'completion-list-mode-hook #'consult-preview-at-point-mode)
-(setopt register-preview-delay 0.5
-        xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref
-        consult-narrow-key "<")
-(advice-add #'register-preview :override #'consult-register-window)
 (consult-customize
  consult-theme :preview-key '(:debounce 0.2 any)
  consult-ripgrep consult-git-grep consult-grep consult-man
@@ -37,15 +44,25 @@
  consult--source-recent-file consult--source-project-recent-file
  :preview-key '(:debounce 0.4 any))
 
+(setopt register-preview-delay 0.5
+        xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref
+        consult-narrow-key "<")
+
+(advice-add #'register-preview :override #'consult-register-window)
+(add-hook 'completion-list-mode-hook #'consult-preview-at-point-mode)
+
 ;; Embark configuration
-(global-set-key (kbd "C-.") #'embark-act)
-(global-set-key (kbd "C-;") #'embark-dwim)
-(global-set-key (kbd "C-h B") #'embark-bindings)
 (setopt prefix-help-command #'embark-prefix-help-command)
+
 (add-to-list 'display-buffer-alist
              '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                nil
                (window-parameters (mode-line-format . none))))
+
+(keymap-global-set "C-." 'embark-act)
+(keymap-global-set "C-;" 'embark-dwim)
+(keymap-global-set "C-h B" 'embark-bindings)
 
 ;; Embark-consult configuration
 (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode)
