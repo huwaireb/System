@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  inherit (pkgs) brave fish;
+  inherit (pkgs) fish;
 in
 {
   imports = [ ./brew.nix ];
@@ -23,7 +23,7 @@ in
   system = {
     stateVersion = 5;
     defaults.dock.persistent-apps = [
-      { app = "${brave}/Applications/Brave Browser.app"; }
+      { app = "/Applications/Brave Browser.app"; }
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }

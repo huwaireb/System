@@ -9,12 +9,18 @@ let
     stdenv.mkDerivation {
       pname = "sk-libfido2";
 
-      inherit (openssh) preConfigure src version buildInputs nativeBuildInputs;
-      
+      inherit (openssh)
+        preConfigure
+        src
+        version
+        buildInputs
+        nativeBuildInputs
+        ;
+
       strictDeps = true;
       enableParallelBuilding = true;
 
-      configureFlags = (openssh.configureFlags or []) ++ ["--with-security-key-standalone"];
+      configureFlags = (openssh.configureFlags or [ ]) ++ [ "--with-security-key-standalone" ];
 
       buildPhase = "make sk-libfido2.dylib";
       installPhase = "install sk-libfido2.dylib -Dt $out/lib";

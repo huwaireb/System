@@ -4,11 +4,13 @@
 (require 'eglot)
 (require 'treesit)
 (require 'hl-todo)
+(require 'apheleia)
 
 ;; Global modes
 (envrc-global-mode +1)    ; Environment management
 (global-eldoc-mode +1)    ; Documentation display
 (global-hl-todo-mode +1)  ; Highlight TODOs
+(apheleia-global-mode +1) ; Formatting
 
 ;; Eldoc configuration
 (setopt eldoc-documentation-strategy #'eldoc-documentation-compose)
@@ -29,6 +31,24 @@
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
+;; C(++) mode configuration
+(autoload 'c-ts-mode "c-ts-mode"
+  "Major mode for C programming +treesit" t)
+
+(add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode))
+
+(with-eval-after-load 'c-ts-mode
+  (add-hook 'c-ts-mode-hook 'eglot-ensure))
+
+(autoload 'c++-ts-mode "c++-ts-mode"
+  "Major mode for C++ programming +treesit" t)
+
+(add-to-list 'major-mode-remap-alist
+             '(c++-mode . c++-ts-mode))
+
+(with-eval-after-load 'c++-ts-mode
+  (add-hook 'c++-ts-mode-hook 'eglot-ensure))
+
 ;; Rust mode configuration
 (autoload 'rust-mode "rust-mode"
   "Major mode for Rust programming" t)
@@ -41,29 +61,24 @@
 
 ;; Nix mode configuration
 (autoload 'nix-ts-mode "nix-ts-mode"
-  "Major mode for editing nix expressions" t)
+  "Major mode for editing nix expressions +treesit" t)
 
-(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
+(add-to-list 'major-mode-remap-alist '(nix-mode . nix-ts-mode))
 
 (with-eval-after-load 'nix-ts-mode
   (add-hook 'nix-ts-mode-hook 'eglot-ensure))
 
 ;; Zig mode configuration
 (autoload 'zig-ts-mode "zig-ts-mode"
-  "Major mode for Zig programming" t)
+  "Major mode for Zig programming +treesit" t)
 
-(add-to-list 'auto-mode-alist '("\\.\\(zig\\|zon\\)\\'" . zig-ts-mode))
+(add-to-list 'major-mode-remap-alist '(zig-mode . zig-ts-mode))
 
 (with-eval-after-load 'zig-ts-mode
   (add-hook 'zig-ts-mode-hook 'eglot-ensure)
   (derived-mode-add-parents 'zig-ts-mode '(zig-mode)))
 
 ;; Objective-C mode configuration
-(autoload 'objc-mode "objc-mode"
-  "Major mode for Objective-C programming" t)
-
-(add-to-list 'auto-mode-alist '("\\.m\\'" . objc-mode))
-
 (with-eval-after-load 'objc-mode
   (add-hook 'objc-mode-hook 'eglot-ensure))
 

@@ -20,16 +20,16 @@
         '((font . "Iosevka-18")
           (top . 77)            
           (left . 68)      
-          (width . 150)        
-          (height . 39)))  
+          (width . 147)
+          (height . 37)))  
 
 ;; Setting up shell environment integration
 (when (or (daemonp) (memq window-system '(mac ns x)))
-  (require 'exec-path-from-shell)                       ; Load shell environment sync library
+  (require 'exec-path-from-shell)                              ; Load shell environment sync library
   (setopt exec-path-from-shell-variables
-          '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG"
-            "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH")) ; Sync key shell variables
-  (exec-path-from-shell-initialize))                    ; Initialize shell environment
+          '("PATH" "MANPATH" "SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO"
+            "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH")) ; Sync key shell variables
+  (exec-path-from-shell-initialize))                           ; Initialize shell environment
 
 (provide 'rm-defaults)
 ;;; rm-defaults.el ends here

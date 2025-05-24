@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  inherit (pkgs) writeScript;
+  inherit (pkgs) stdenv writeScript writeScriptBin;
   cfg = config.programs.emacs;
 in
 {
@@ -14,8 +19,10 @@ in
 
     ;;; Code:
 
-    ;; Make lexical binding the default early on (Requires Emacs 31)
-    ;; (set-default-top-level-value 'lexical-binding t)
+    ${lib.optionalString (lib.versionAtLeast cfg.package.version "31.0") ''
+      ;; Make lexical binding the default early on
+      (set-default-top-level-value 'lexical-binding t)
+    ''}
 
     ;; Increasing the GC threshold is a common way to speed up Emacs.
     ;; `gc-cons-threshold' sets at what point Emacs should invoke its garbage
@@ -25,6 +32,12 @@ in
     (setopt gc-cons-threshold most-positive-fixnum ; 2^61 bytes
             gc-cons-percentage 0.6)
 
+    ;; Garbage Collector Optimization Hack
+    (add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 16 1024 1024) ; 16mb
+                  gc-cons-percentage 0.1)))
+
     ;; The command-line option ‘-batch’ makes Emacs to run noninteractively.
     ;; In noninteractive sessions, prioritize non-byte-compiled source files to
     ;; prevent the use of stale byte-code.  Otherwise, skipping the mtime checks
@@ -32,10 +45,10 @@ in
     (setopt load-prefer-newer noninteractive)
 
     ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
-    (menu-bar-mode 0)
-    (tool-bar-mode 0)
-    (scroll-bar-mode 0)
-    (blink-cursor-mode 0)
+    (menu-bar-mode -1)
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+    (blink-cursor-mode -1)
 
     ;; Contrary to common configurations, this is all that's needed to set UTF-8
     ;; as the default coding system:
@@ -53,7 +66,10 @@ in
           (lambda () (message (concat "Loaded config in " (emacs-init-time)))))
 
     ;; Load our modules
-    (add-to-list 'load-path "${assert lib.assertMsg (lib.versionAtLeast cfg.package.version "29.0") "Requires emacs 29"; ../emacs}") 
+    (add-to-list 'load-path "${
+      assert lib.assertMsg (lib.versionAtLeast cfg.package.version "29.0") "Requires emacs 29";
+      ../emacs
+    }") 
     ;; early-init.el ends here.
   '';
 
@@ -76,6 +92,7 @@ in
     e.cape
     e.corfu
     e.orderless
+    e.nerd-icons-corfu
 
     # Defaults
     e.exec-path-from-shell
@@ -95,6 +112,17 @@ in
     e.magit
   ];
 
-  services.emacs = { inherit (cfg) enable; };
+  services.emacs = {
+    inherit (cfg) enable;
+    # Get the Emacs icon on Darwin by executing the app located inside the bundle
+    package =
+      if stdenv.isDarwin then
+        writeScriptBin "emacs" ''
+          exec ${cfg.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs "$@"
+        ''
+      else
+        cfg.finalPackage;
+  };
+
   home.sessionVariables.EDITOR = writeScript "emacsclient" ''${cfg.finalPackage}/bin/emacsclient -c "$@"'';
 }

@@ -3,14 +3,20 @@
 (require 'windmove)
 
 ;; Enabling global modes
-(meow-global-mode +1) ; Modal Editing 
+(meow-global-mode +1)        ; Modal Editing
+(electric-pair-mode +1)      ; Matching pairs
+(delete-selection-mode +1)   ; Delete selected text on typing
+(global-auto-revert-mode +1) ; Revert file when out-of-sync
 
 ;; Sane Opts
-(setopt tab-always-indent 'complete                                             ; Make TAB key indent or complete based on context
+(setopt tab-width 3
+        standard-indent 3
+        tab-always-indent 'complete                                             ; Complete if indented
+        indent-tabs-mode nil                                                    ; Don't use tabs for indent
         text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
         read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
 
-;; --- Window Management Keybindings ---
+;; Window Management Keybindings
 (defun rm/split-window-below ()
   (interactive)
   (select-window (split-window-below)))
@@ -37,7 +43,9 @@
 
 (keymap-global-set "C-c w" rm/window-map)
 
-;; --- Meow Modal Editing Keybindings ---
+;; Meow Modal Editing Keybindings
+(meow--enable-shims) ; Enable shims to better work with packages like magit, eldoc, corfu etc
+
 (defun rm/meow-redo ()
   "Cancel current selection then redo using Emacs' undo-redo."
   (interactive)
@@ -61,7 +69,6 @@
  '("y" . meow-clipboard-save)
  '("p" . meow-clipboard-yank)
  '("c" . comment-dwim))
-
 (rm/meow-bind-digit-arguments #'meow-leader-define-key)
 
 ;; Normal mode keybindings
@@ -103,14 +110,16 @@
  '("S" . meow-open-above)
  '("A" . meow-open-below)
  '("c" . meow-change)
- '("x" . meow-kill)
- '("X" . meow-backward-delete)
+ '("d" . meow-kill)
+ '("D" . meow-backward-delete)
  '("r" . meow-replace)
  '("p" . meow-yank)
  '("y" . meow-save)
  '("u" . meow-undo)
  '("U" . rm/meow-redo)
- '("j" . meow-join))
+ '("j" . meow-join)
+ '(">" . indent-rigidly-right)
+ '("<" . indent-rigidly-left))
 
 ;; Navigation
 (meow-normal-define-key
