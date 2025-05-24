@@ -25,7 +25,7 @@
 (keymap-global-set "C-c k" 'eldoc)
 
 ;; Treesit configuration
-(setopt treesit-font-lock-level 4)  ; Maximum syntax highlighting level
+(setopt treesit-font-lock-level 4) ; Maximum syntax highlighting level
 
 ;; Line Numbers
 (with-eval-after-load 'prog-mode

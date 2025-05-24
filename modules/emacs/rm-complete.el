@@ -33,24 +33,18 @@
 (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
 
 ;; Corfu keybindings
-(keymap-set corfu-map "C-n" #'corfu-next)
-(keymap-set corfu-map "C-p" #'corfu-previous)
-(keymap-set corfu-map "<return>" #'corfu-insert)
-(keymap-set corfu-map "<escape>" #'corfu-quit)
-(keymap-set corfu-map "M-d" #'corfu-info-documentation)
-(keymap-set corfu-map "M-l" #'corfu-info-location)
-(keymap-set corfu-map "M-n" #'corfu-popupinfo-scroll-up)
-(keymap-set corfu-map "M-p" #'corfu-popupinfo-scroll-down)
+(keymap-set corfu-map "C-n" 'corfu-next)
+(keymap-set corfu-map "C-p" 'corfu-previous)
+(keymap-set corfu-map "<return>" 'corfu-insert)
+(keymap-set corfu-map "<escape>" 'corfu-quit)
+(keymap-set corfu-map "M-d" 'corfu-info-documentation)
+(keymap-set corfu-map "M-l" 'corfu-info-location)
+(keymap-set corfu-map "M-n" 'corfu-popupinfo-scroll-up)
+(keymap-set corfu-map "M-p" 'corfu-popupinfo-scroll-down)
 
 ;; Cape configuration
 (keymap-global-set "C-c p" 'cape-prefix-map)
-
-(defun rm/setup-cape-completions ()
-  (dolist (fn '(cape-dabbrev cape-file cape-elisp-symbol cape-keyword))
-    (add-hook 'completion-at-point-functions fn)))
-
-(add-hook 'prog-mode-hook #'rm/setup-cape-completions)
-(add-hook 'text-mode-hook #'rm/setup-cape-completions)
+(add-to-list 'completion-at-point-functions #'cape-file)
 
 (provide 'rm-complete)
 ;;; rm-complete.el ends here
