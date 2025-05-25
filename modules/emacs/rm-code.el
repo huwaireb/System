@@ -13,12 +13,13 @@
 (apheleia-global-mode +1) ; Formatting
 
 ;; Eldoc configuration
-(setopt eldoc-documentation-strategy #'eldoc-documentation-compose)
+(setopt eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
 ;; Eglot configuration
-(setopt read-process-output-max (* 4 1024 1024)  ; 4MB for LSP performance
-        eglot-autoshutdown t                     ; Shutdown LSP server when done
-        eglot-stay-out-of '(flymake))            ; Let Flymake handle diagnostics
+(setopt read-process-output-max (* 4 1024 1024) ; 4MB for LSP performance
+        eglot-autoshutdown t                    ; Shutdown LSP server when done
+        eglot-stay-out-of '(flymake)            ; Let Flymake handle diagnostics
+        eglot-sync-connect nil)                 ; Don't wait for LSP to connect
 
 (keymap-global-set "C-c a" 'eglot-code-actions)
 (keymap-global-set "C-c r" 'eglot-rename)

@@ -1,4 +1,5 @@
 ;;; rm-edit.el --- Keybindings for Editing -*- lexical-binding: t -*-
+(require 'embark)
 (require 'meow)
 (require 'windmove)
 
@@ -15,6 +16,22 @@
         indent-tabs-mode nil                                                    ; Don't use tabs for indent
         text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
         read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
+
+;; Embark
+(setopt prefix-help-command #'embark-prefix-help-command)
+
+(keymap-global-set "C-." 'embark-act)
+(keymap-global-set "C-;" 'embark-dwim)
+(keymap-global-set "C-h B" 'embark-bindings)
+
+(with-eval-after-load 'embark
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Git-Link
+(keymap-global-set "C-c g l" 'git-link)
 
 ;; Window Management Keybindings
 (defun rm/split-window-below ()

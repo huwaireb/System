@@ -98,12 +98,13 @@ in
     e.exec-path-from-shell
 
     # Edit
+    e.embark
+    e.embark-consult
+    e.git-link
     e.meow
 
     # Interface
     e.consult
-    e.embark
-    e.embark-consult
     e.marginalia
     e.vertico
 
