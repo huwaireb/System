@@ -11,19 +11,32 @@
 ;; Appearance
 (load-theme 'modus-vivendi t)
 
-;; Enable global modes
-(which-key-mode +1)
-(marginalia-mode +1)
-(display-line-numbers-mode +1)
-
-;; Fringe
-(set-face-attribute 'fringe nil :background nil)
-
-;; Line Numbers
 (custom-set-faces
+ '(fringe ((t (:background nil :foreground nil))))
  '(line-number ((t (:background nil :foreground "#666666"))))
  '(line-number-current-line ((t (:background nil :foreground "#999999")))))
 
+;; Enable global modes
+(which-key-mode +1)
+(marginalia-mode +1)
+(global-display-line-numbers-mode +1)
+
+;; Frame
+(setopt default-frame-alist   
+        '((font . "Iosevka-18")
+          (top . 77)            
+          (left . 68)      
+          (width . 147)
+          (height . 37)
+          (ns-transparent-titlebar . t)
+          (ns-appearance . dark)))
+
+;; Title
+(setopt ns-use-proxy-icon nil    ; Remove Icon
+        icon-title-format "%b"   ; Buffer name as title
+        frame-title-format "%b") ; ...
+
+;; Line Numbers
 (setopt display-line-numbers-type 'relative
         display-line-numbers-width 3
         display-line-numbers-widen t
