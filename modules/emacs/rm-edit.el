@@ -1,15 +1,10 @@
 ;;; rm-edit.el --- Keybindings for Editing -*- lexical-binding: t -*-
-(require 'embark)
-(require 'meow)
-(require 'windmove)
-
-;; Enabling global modes
 (meow-global-mode +1)        ; Modal Editing
 (electric-pair-mode +1)      ; Matching pairs
 (delete-selection-mode +1)   ; Delete selected text on typing
 (global-auto-revert-mode +1) ; Revert file when out-of-sync
 
-;; Sane Opts
+;; Sane Defaults
 (setopt tab-width 3
         standard-indent 3
         tab-always-indent 'complete                                             ; Complete if indented
@@ -17,23 +12,22 @@
         text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
         read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
 
-;; Embark
+;; +embark
 (setopt prefix-help-command #'embark-prefix-help-command)
 
 (keymap-global-set "C-." 'embark-act)
 (keymap-global-set "C-;" 'embark-dwim)
 (keymap-global-set "C-h B" 'embark-bindings)
 
-(with-eval-after-load 'embark
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+(add-to-list 'display-buffer-alist
+             '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+               nil
+               (window-parameters (mode-line-format . none))))
 
-;; Git-Link
+;; +git-link
 (keymap-global-set "C-c g l" 'git-link)
 
-;; Window Management Keybindings
+;; +windmove
 (defun rm/split-window-below ()
   (interactive)
   (select-window (split-window-below)))
@@ -60,7 +54,7 @@
 
 (keymap-global-set "C-c w" rm/window-map)
 
-;; Meow Modal Editing Keybindings
+;; +meow
 (meow--enable-shims) ; Enable shims to better work with packages like magit, eldoc, corfu etc
 
 (defun rm/meow-redo ()
