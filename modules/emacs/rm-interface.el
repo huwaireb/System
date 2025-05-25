@@ -5,7 +5,7 @@
 (global-display-line-numbers-mode +1)
 
 ;; Appearance
-(load-theme 'modus-vivendi t)
+(load-theme 'modus-operandi-tinted t)
 
 (custom-set-faces
  '(fringe ((t (:background unspecified :foreground unspecified))))
@@ -20,7 +20,7 @@
           (width . 147)
           (height . 37)
           (ns-transparent-titlebar . t)
-          (ns-appearance . dark)))
+          (ns-appearance . light)))
 
 ;; Title
 (setopt ns-use-proxy-icon nil    ; Remove Icon

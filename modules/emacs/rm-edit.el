@@ -55,6 +55,8 @@
 (keymap-global-set "C-c w" rm/window-map)
 
 ;; +meow
+(require 'meow) ; Meow is auto-loaded when meow-global-mode is called, but just for my sanity.
+
 (meow--enable-shims) ; Enable shims to better work with packages like magit, eldoc, corfu etc
 
 (defun rm/meow-redo ()
