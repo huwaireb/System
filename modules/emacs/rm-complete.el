@@ -27,7 +27,7 @@
         corfu-cycle t
         corfu-auto t
         corfu-auto-prefix 2
-        corfu-auto-delay 0.2)
+        corfu-auto-delay 0.1)
 
 (corfu-history-mode)
 (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)

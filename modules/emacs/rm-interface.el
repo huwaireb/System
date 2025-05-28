@@ -1,26 +1,34 @@
 ;;; rm-interface.el --- User Interface Settings -*- lexical-binding: t -*-
+(minions-mode +1)    ; Less messy modeline
 (vertico-mode +1)    ; Vertical Completion UI
 (which-key-mode +1)  ; Help UI For keybindings
 (marginalia-mode +1) ; Margin Annotations
 (global-display-line-numbers-mode +1)
 
 ;; Appearance
-(load-theme 'modus-operandi-tinted t)
+(load-theme 'modus-vivendi t)
 
 (custom-set-faces
  '(fringe ((t (:background unspecified :foreground unspecified))))
+ '(mode-line ((t (:background "#1A1A1A" :foreground "#FFFFFF" :box nil))))
+ '(mode-line-inactive ((t (:background "#121212" :foreground "#A0A0A0" :box nil))))
  '(line-number ((t (:background unspecified :foreground "#666666"))))
  '(line-number-current-line ((t (:background unspecified :foreground "#999999")))))
 
 ;; Frame
-(setopt default-frame-alist   
+(setopt scroll-margin 0
+        scroll-conservatively 101
+        ns-use-srgb-colorspace nil
+        default-frame-alist   
         '((font . "Iosevka-18")
           (top . 77)            
           (left . 68)      
           (width . 147)
           (height . 37)
+          (vertical-scroll-bars . nil)
+          (horizontal-scroll-bars . nil)
           (ns-transparent-titlebar . t)
-          (ns-appearance . light)))
+          (ns-appearance . dark)))
 
 ;; Title
 (setopt ns-use-proxy-icon nil    ; Remove Icon
@@ -30,6 +38,12 @@
 ;; +vertico
 (setopt vertico-cycle t
         vertico-resize t)
+
+;; Modeline
+(require 'moody)
+(moody-replace-mode-line-front-space)
+(moody-replace-mode-line-buffer-identification)
+(moody-replace-vc-mode)
 
 ;; Line Numbers
 (setopt display-line-numbers-type 'relative

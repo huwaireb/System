@@ -45,7 +45,7 @@ in
     (setopt load-prefer-newer noninteractive)
 
     ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
-    (menu-bar-mode -1)
+    ${lib.optionalString (!stdenv.isDarwin) "(menu-bar-mode -1)"}
     (tool-bar-mode -1)
     (scroll-bar-mode -1)
     (blink-cursor-mode -1)
@@ -72,6 +72,20 @@ in
     }") 
     ;; early-init.el ends here.
   '';
+
+  programs.emacs.package = pkgs.emacs.overrideAttrs (o: {
+    postInstall =
+      let
+        darwinIcon = pkgs.fetchurl {
+          url = "https://github.com/SavchenkoValeriy/emacs-icons/raw/e6ac804a52600b607d9e8881a7f51ea2a3afe80a/curvy-blender/Emacs.icns";
+          sha256 = "1phSRxzHEbK8vj7MdyYjYOKphb3JH0Wes4Y5yIOL7+4=";
+        };
+      in
+      (o.postInstall or "")
+      + lib.optionalString stdenv.isDarwin ''
+        install -m644 ${darwinIcon} $out/Applications/Emacs.app/Contents/Resources/Emacs.icns
+      '';
+  });
 
   programs.emacs.extraPackages = e: [
     # Code
@@ -106,11 +120,16 @@ in
     # Interface
     e.consult
     e.marginalia
+    e.minions
+    e.moody
     e.vertico
 
     # Version Control
     e.diff-hl
     e.magit
+
+    # AI
+    e.gptel
   ];
 
   services.emacs = {

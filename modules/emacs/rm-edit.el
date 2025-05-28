@@ -10,7 +10,14 @@
         tab-always-indent 'complete                                             ; Complete if indented
         indent-tabs-mode nil                                                    ; Don't use tabs for indent
         text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
+        mac-command-modifier 'meta
         read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
+
+(setopt mac-command-modifier 'meta
+        mac-option-modifier 'none)
+
+;; Ghostty Quick Terminal
+(unbind-key "<f3>")
 
 ;; +embark
 (setopt prefix-help-command #'embark-prefix-help-command)
@@ -71,6 +78,25 @@
   (dolist (digit '("0" "1" "2" "3" "4" "5" "6" "7" "8" "9"))
     (funcall keymap digit #'meow-digit-argument)))
 
+(defvar-keymap rm/goto-map
+  :doc "Keymap for navigation commands inspired by Helix"
+  "e" #'end-of-buffer
+  "f" #'find-file-at-point
+  "h" #'beginning-of-line
+  "l" #'end-of-line
+  "s" #'back-to-indentation
+  "d" #'xref-find-definitions
+  "D" #'eglot-find-declaration
+  "y" #'eglot-find-typeDefinition
+  "r" #'xref-find-references
+  "i" #'eglot-find-implementation
+  "t" #'beginning-of-buffer
+  "c" #'recenter-top-bottom
+  "n" #'next-buffer
+  "p" #'previous-buffer
+  "k" #'previous-line
+  "j" #'next-line)
+
 ;; Motion bindings
 (meow-motion-define-key
  '("e" . meow-prev)
@@ -112,7 +138,6 @@
  '("E" . meow-prev-expand)
  '("H" . meow-left-expand)
  '("I" . meow-right-expand)
- '("g" . meow-cancel-selection)
  '("z" . meow-pop-selection)
  '("G" . meow-grab))
 
@@ -136,6 +161,7 @@
 
 ;; Navigation
 (meow-normal-define-key
+ (cons "g" rm/goto-map)
  '("[" . meow-beginning-of-thing)
  '("]" . meow-end-of-thing)
  '("," . meow-inner-of-thing)

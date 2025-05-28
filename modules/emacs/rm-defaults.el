@@ -4,6 +4,7 @@
 ;; Suppress Insanity
 (setopt ring-bell-function 'ignore ; Suppress audible bell
         use-dialog-box nil         ; Avoid GUI dialog boxes
+        ns-pop-up-frames nil
         inhibit-startup-screen t)
 
 ;; Configuring file and buffer behavior

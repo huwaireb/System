@@ -34,6 +34,8 @@ in
       window-padding-y = 15;
       window-padding-color = "extend-always";
 
+      window-save-state = "always";
+
       macos-non-native-fullscreen = "visible-menu";
       macos-option-as-alt = "left";
       macos-titlebar-style = "tabs";
@@ -42,7 +44,7 @@ in
 
       window-colorspace = "display-p3";
 
-      keybind = [ "global:grave_accent=toggle_quick_terminal" ];
+      keybind = [ "global:f3=toggle_quick_terminal" ];
     };
   };
 }

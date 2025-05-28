@@ -7,5 +7,6 @@
 (require 'rm-edit)
 (require 'rm-interface)
 (require 'rm-version-control)
+(require 'rm-ai)
 
 ;; init.el ends here.
