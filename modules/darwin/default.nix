@@ -22,7 +22,7 @@
     };
 
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = "Dark";
 
       AppleICUForce24HourTime = true;
 
@@ -33,6 +33,8 @@
       NSWindowShouldDragOnGesture = true;
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
+
+      "com.apple.keyboard.fnState" = true;
     };
 
     CustomSystemPreferences."com.apple.AdLib" = {

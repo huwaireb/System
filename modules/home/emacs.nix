@@ -97,7 +97,6 @@ in
     e.nix-ts-mode
     e.rust-mode
     e.swift-mode
-    e.swift-ts-mode
     e.treesit-grammars.with-all-grammars
     e.zig-mode
     e.zig-ts-mode

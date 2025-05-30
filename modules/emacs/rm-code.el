@@ -1,6 +1,7 @@
 ;;; rm-code.el --- Programming Language Modes -*- lexical-binding: t -*-
 (envrc-global-mode +1)    ; Load direnv when available
 (global-eldoc-mode +1)    ; Documentation display
+(editorconfig-mode +1)    ; Respect .editorconfig by default
 (global-hl-todo-mode +1)  ; Highlight TODOs.
 (apheleia-global-mode +1) ; Auto Formatter
 
@@ -31,11 +32,13 @@
 (keymap-global-set "C-c r" 'eglot-rename)
 (keymap-global-set "C-c k" 'eldoc)
 
-(dolist (hook '(c-ts-mode-hook c++-ts-mode-hook rust-mode-hook nix-ts-mode-hook zig-ts-mode-hook buck2-mode-hook))
+(dolist (hook '(buck2-mode-hook c-ts-mode-hook c++-ts-mode-hook nix-ts-mode-hook
+                                rust-mode-hook swift-mode-hook zig-ts-mode-hook))
   (add-hook hook 'eglot-ensure))
 
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs '(buck2-mode . ("buck2" "lsp"))))
+  (add-to-list 'eglot-server-programs '(buck2-mode . ("buck2" "lsp")))
+  (add-to-list 'eglot-server-programs '(swift-mode . ("sourcekit-lsp"))))
 
 ;; +treesit
 (setopt treesit-font-lock-level 4      ; Maximum syntax highlighting level
@@ -47,7 +50,8 @@
                                  (zig-mode . zig-ts-mode)
                                  (python-mode . python-ts-mode)))
 
-(derived-mode-add-parents 'zig-ts-mode '(zig-mode)) ; This should be upstream
+;; These should be upstream
+(derived-mode-add-parents 'zig-ts-mode '(zig-mode))
 
 (provide 'rm-code)
 ;;; rm-code.el ends here

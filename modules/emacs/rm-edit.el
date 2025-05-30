@@ -10,11 +10,12 @@
         tab-always-indent 'complete                                             ; Complete if indented
         indent-tabs-mode nil                                                    ; Don't use tabs for indent
         text-mode-ispell-word-completion nil                                    ; Disable ispell completion in text mode
-        mac-command-modifier 'meta
         read-extended-command-predicate #'command-completion-default-include-p) ; Filter M-x commands
 
-(setopt mac-command-modifier 'meta
-        mac-option-modifier 'none)
+(setopt mac-option-modifier 'meta
+        mac-command-modifier 'control
+        mac-right-option-modifier 'meta
+        mac-right-command-modifier 'super)
 
 ;; Ghostty Quick Terminal
 (unbind-key "<f3>")
