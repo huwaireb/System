@@ -23,7 +23,7 @@ in
   system = {
     stateVersion = 5;
     defaults.dock.persistent-apps = [
-      { app = "/Applications/Brave Browser.app"; }
+      { app = "${pkgs.brave}/Applications/Brave Browser.app"; }
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }

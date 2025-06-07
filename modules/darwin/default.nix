@@ -22,7 +22,7 @@
     };
 
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = "Dark";
 
       AppleICUForce24HourTime = true;
 

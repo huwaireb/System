@@ -33,12 +33,13 @@
 (keymap-global-set "C-c k" 'eldoc)
 
 (dolist (hook '(buck2-mode-hook c-ts-mode-hook c++-ts-mode-hook nix-ts-mode-hook
-                                rust-mode-hook swift-mode-hook zig-ts-mode-hook))
+                                rust-mode-hook swift-mode-hook typst-ts-mode zig-ts-mode-hook))
   (add-hook hook 'eglot-ensure))
 
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(buck2-mode . ("buck2" "lsp")))
-  (add-to-list 'eglot-server-programs '(swift-mode . ("sourcekit-lsp"))))
+  (add-to-list 'eglot-server-programs '(swift-mode . ("sourcekit-lsp")))
+  (add-to-list 'eglot-server-programs '(typst-ts-mode . ("tinymist" "lsp"))))
 
 ;; +treesit
 (setopt treesit-font-lock-level 4      ; Maximum syntax highlighting level
@@ -52,6 +53,11 @@
 
 ;; These should be upstream
 (derived-mode-add-parents 'zig-ts-mode '(zig-mode))
+
+;; +apheleia
+(with-eval-after-load 'apheleia
+  (add-to-list 'apheleia-formatters '(swift-format . ("swift-format" "-")))
+  (add-to-list 'apheleia-mode-alist '(swift-mode . swift-format)))
 
 (provide 'rm-code)
 ;;; rm-code.el ends here

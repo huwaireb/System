@@ -100,6 +100,7 @@ in
     e.treesit-grammars.with-all-grammars
     e.zig-mode
     e.zig-ts-mode
+    e.typst-ts-mode
 
     # Complete
     e.cape
