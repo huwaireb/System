@@ -1,11 +1,12 @@
 inputs@{
+  self,
   nixpkgs,
   darwin,
   home-manager,
   ...
 }:
 let
-  specialArgs = { inherit inputs; };
+  specialArgs = { inherit inputs self; };
 in
 {
   nixosSystem' =

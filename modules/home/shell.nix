@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  xdg.configFile."fish/themes/tokyonight.theme".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/folke/tokyonight.nvim/refs/tags/v4.11.0/extras/fish_themes/tokyonight_night.theme";
-    sha256 = "yabv/At93pvL3Kp/H4XGn8YHd5zfsNsOlktj5iUx3AM=";
+  xdg.configFile."fish/themes/impaled-nazarene.theme".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/metalelf0/black-metal-theme-neovim/1838337ce73a8de38e81bc40abe54f07b2380273/extras/fish/impaled-nazarene.fish";
+    sha256 = "yK2lv+lAd5Kg/Q/t/yzFkHVzuQsYyt0hEYmJyXb9jf8=";
   };
 
   programs.fish = {
@@ -12,7 +12,7 @@
     shellInit = ''
       set fish_greeting
       set fish_key_bindings fish_vi_key_bindings
-      fish_config theme choose tokyonight
+      fish_config theme choose impaled-nazarene
     '';
 
     functions.fish_mode_prompt = ""; # Set in fish_prompt

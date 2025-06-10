@@ -43,5 +43,15 @@
       forceLimitAdTracking = true;
       personalizedAdsMigrated = false;
     };
+
+    CustomUserPreferences.NSGlobalDomain = {
+      AppleIconAppearanceTheme = "ClearDark";
+      AppleIconAppearanceTintColor = "Graphite";
+      AppleLocale = "en_AE";
+      AppleLanguages = [
+        "en-AE"
+        "ar-AE"
+      ];
+    };
   };
 }

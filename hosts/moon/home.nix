@@ -6,7 +6,7 @@
 
   services.wallpaper = {
     enable = true;
-    path = ./wallpaper.jpg;
+    path = ./wallpaper.heic;
   };
 
   home.stateVersion = "23.11";

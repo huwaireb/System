@@ -68,7 +68,10 @@ in
     ;; Load our modules
     (add-to-list 'load-path "${
       assert lib.assertMsg (lib.versionAtLeast cfg.package.version "29.0") "Requires emacs 29";
-      ../emacs
+      builtins.path {
+        path = ../emacs;
+        name = "source";
+      }
     }") 
     ;; early-init.el ends here.
   '';
@@ -91,6 +94,7 @@ in
     # Code
     e.apheleia
     e.envrc
+    e.fstar-mode
     e.hl-todo
     e.markdown-mode
     e.nix-mode

@@ -15,4 +15,4 @@
 !*.nix
 
 # Host assets
-!*.jpg
+!*.heic
