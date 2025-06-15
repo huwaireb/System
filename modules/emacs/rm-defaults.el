@@ -28,6 +28,10 @@
             "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH")) ; Sync key shell variables
   (exec-path-from-shell-initialize))                           ; Initialize shell environment
 
+;; MacOS ls doesn't support --dired
+(when (string= system-type "darwin")       
+  (setopt dired-use-ls-dired nil))
+
 (provide 'rm-defaults)
 ;;; rm-defaults.el ends here
 

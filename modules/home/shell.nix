@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   xdg.configFile."fish/themes/impaled-nazarene.theme".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/metalelf0/black-metal-theme-neovim/1838337ce73a8de38e81bc40abe54f07b2380273/extras/fish/impaled-nazarene.fish";
-    sha256 = "yK2lv+lAd5Kg/Q/t/yzFkHVzuQsYyt0hEYmJyXb9jf8=";
+    url = "https://raw.githubusercontent.com/metalelf0/black-metal-theme-neovim/1838337ce73a8de38e81bc40abe54f07b2380273/extras/fish_themes/impaled-nazarene.theme";
+    sha256 = "8s99eKeVfXPm7FS3q6BB3Sz6Cu1MC6aPh5JmRqh0avY=";
   };
 
   programs.fish = {

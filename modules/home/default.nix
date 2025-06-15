@@ -16,6 +16,7 @@
     ./version-control.nix
 
     # Desktop
+    ./zed.nix
     ./ghostty.nix
     ./browser.nix
     ./services/wallpaper

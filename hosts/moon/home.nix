@@ -2,7 +2,9 @@
   imports = [ ../../modules/home ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
+
   programs.emacs.enable = true;
+  programs.zed-editor.enable = true;
 
   services.wallpaper = {
     enable = true;

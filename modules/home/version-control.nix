@@ -1,4 +1,5 @@
 {
+  programs.mergiraf.enable = true;
   programs.git = {
     enable = true;
 
@@ -9,9 +10,9 @@
     patdiff.enable = true;
 
     signing = {
-       key = "~/.ssh/id";
-       format = "ssh";
-       signByDefault = true;
+      key = "~/.ssh/id";
+      format = "ssh";
+      signByDefault = true;
     };
 
     extraConfig = {
