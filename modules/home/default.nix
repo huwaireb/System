@@ -8,6 +8,7 @@
   imports = [
     ../system.nix
 
+    ./helix.nix
     ./emacs.nix
     ./gpg.nix
     ./ssh.nix

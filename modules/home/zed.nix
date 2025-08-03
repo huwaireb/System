@@ -14,9 +14,8 @@
       remove_trailing_whitespace_on_save = true;
       buffer_line_height = "standard";
 
-      vim_mode = true;
+      helix_mode = true;
       vim = {
-        default_mode = "helix_normal";
         use_system_clipboard = "always";
         use_multiline_find = true;
         use_smartcase_find = true;
@@ -33,6 +32,13 @@
         "nixd"
         "!nil"
       ];
+
+      languages.Starlark.language_servers = [
+        "buck2-lsp"
+        "!starpls"
+      ];
+
+      languages.Starlark.formatter = [ { external.command = "buildifier"; } ];
 
       agent = {
         enabled = true;

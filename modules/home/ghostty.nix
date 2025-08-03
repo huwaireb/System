@@ -44,7 +44,10 @@ in
 
       window-colorspace = "display-p3";
 
-      keybind = [ "global:f3=toggle_quick_terminal" ];
+      keybind = [
+        "global:f3=toggle_quick_terminal"
+        ''shift+enter=text:\n''
+      ];
     };
   };
 }

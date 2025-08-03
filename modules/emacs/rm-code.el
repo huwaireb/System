@@ -23,6 +23,10 @@
 
 (add-to-list 'auto-mode-alist '("\\(?:BUCK\\|PACKAGE\\|\\.bzl\\|\\.star\\)\\'" . buck2-mode))
 
+
+;; +tuareg
+(add-hook 'tuareg-mode-hook 'ocaml-eglot)
+
 ;; +eglot
 (setopt read-process-output-max (* 4 1024 1024) ; 4MB for LSP performance
         eglot-autoshutdown t                    ; Shutdown LSP server when done
@@ -32,7 +36,7 @@
 (keymap-global-set "C-c r" 'eglot-rename)
 (keymap-global-set "C-c k" 'eldoc)
 
-(dolist (hook '(buck2-mode-hook c-ts-mode-hook c++-ts-mode-hook nix-ts-mode-hook
+(dolist (hook '(buck2-mode-hook c-ts-mode-hook c++-ts-mode-hook nix-ts-mode-hook ocaml-eglot-hook
                                 rust-mode-hook swift-mode-hook typst-ts-mode zig-ts-mode-hook))
   (add-hook hook 'eglot-ensure))
 

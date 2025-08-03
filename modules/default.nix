@@ -28,6 +28,24 @@ in
     channel.enable = false;
     optimise.automatic = true;
 
+    linux-builder = lib.mkIf stdenv.isDarwin {
+      enable = false;
+      ephemeral = true;
+      systems = [ "aarch64-linux" ];
+      supportedFeatures = [
+        "benchmark"
+        "kvm"
+        "big-parallel"
+        "nixos-test"
+      ];
+
+      config.virtualisation = {
+        cores = 8;
+        darwin-builder.diskSize = 100 * 1024;
+        darwin-builder.memorySize = 8 * 1024;
+      };
+    };
+
     settings = {
       keep-outputs = true;
       keep-derivations = true;
@@ -53,9 +71,16 @@ in
       ];
 
       trusted-users = [
-        "root"
         "@wheel"
+        "@admin"
       ];
+    };
+  };
+
+  launchd.daemons.linux-builder = lib.mkIf stdenv.isDarwin {
+    serviceConfig = {
+      StandardOutPath = "/var/log/darwin-builder.log";
+      StandardErrorPath = "/var/log/darwin-builder.log";
     };
   };
 }

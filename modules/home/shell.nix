@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   xdg.configFile."fish/themes/impaled-nazarene.theme".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/metalelf0/black-metal-theme-neovim/1838337ce73a8de38e81bc40abe54f07b2380273/extras/fish_themes/impaled-nazarene.theme";
@@ -8,7 +13,10 @@
   programs.fish = {
     enable = true;
 
-    shellAliases.x = "$EDITOR";
+    shellAliases.x = toString (
+      pkgs.writeScript "emacsclient" ''${config.programs.emacs.finalPackage}/bin/emacsclient -c "$@"''
+    );
+
     shellInit = ''
       set fish_greeting
       set fish_key_bindings fish_vi_key_bindings

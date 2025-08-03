@@ -100,6 +100,9 @@ in
     e.nix-mode
     e.nix-ts-mode
     e.rust-mode
+    e.tuareg
+    e.dune
+    e.ocaml-eglot
     e.swift-mode
     e.treesit-grammars.with-all-grammars
     e.zig-mode
@@ -147,6 +150,4 @@ in
       else
         cfg.finalPackage;
   };
-
-  home.sessionVariables.EDITOR = writeScript "emacsclient" ''${cfg.finalPackage}/bin/emacsclient -c "$@"'';
 }
