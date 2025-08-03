@@ -57,7 +57,7 @@
     };
 
     settings = {
-      theme = "gruvbox_ts";
+      theme = "tokyonight_ts";
 
       editor = {
         line-number = "relative";
