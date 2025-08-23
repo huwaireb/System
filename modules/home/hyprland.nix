@@ -15,7 +15,7 @@ in
     wl-clipboard
     wtype
     xdg-utils
-    xwaylandvideobridge
+    kdePackages.xwaylandvideobridge
   ];
 
   wayland.windowManager.hyprland = {
