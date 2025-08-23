@@ -38,5 +38,10 @@
         type = "desktop";
         imports = [ ./hosts/moon ];
       };
+
+      nixosConfigurations.triton = lib.nixosSystem' {
+        type = "desktop";
+        imports = [ ./hosts/triton ];
+      };
     };
 }
