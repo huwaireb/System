@@ -1,7 +1,7 @@
 {
   programs.zed-editor = {
     userSettings = {
-      theme = "Gruvbox Material";
+      theme = "Catppuccin Espresso (Blur)";
       project_panel.dock = "right";
 
       ui_font_size = 16;
@@ -17,7 +17,6 @@
       helix_mode = true;
       vim = {
         use_system_clipboard = "always";
-        use_multiline_find = true;
         use_smartcase_find = true;
       };
 
@@ -42,7 +41,6 @@
 
       agent = {
         enabled = true;
-        version = "2";
         default_model = {
           provider = "copilot_chat";
           model = "claude-sonnet-4";
