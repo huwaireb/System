@@ -6,7 +6,6 @@
 
   networking.hostName = "triton";
 
-  nixpkgs.hostPlatform = "x86_64-linux";
   home-manager.users.rmu = import ./home.nix;
 
   boot.loader.systemd-boot.enable = true;

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
 
   boot = {
@@ -35,12 +35,7 @@
       nvidiaSettings = true;
 
       modesetting.enable = true;
-      powerManagement.finegrained = true;
-
-      prime.offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
+      powerManagement.enable = true;
     };
 
     cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
@@ -71,5 +66,10 @@
       matchConfig.Name = "eno1";
       networkConfig.DHCP = "yes";
     };
+  };
+
+  nixpkgs = {
+    hostPlatform = "x86_64-linux";
+    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "nvidia-x11" ];
   };
 }
