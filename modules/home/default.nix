@@ -20,7 +20,6 @@
     ./zed.nix
     ./ghostty.nix
     ./browser.nix
-    ./services/wallpaper
   ];
 
   home.packages = lib.mkIf (config.type == "desktop") (

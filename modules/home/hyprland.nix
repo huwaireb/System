@@ -18,6 +18,20 @@ in
     xwaylandvideobridge
   ];
 
+  programs.xwayland.enable = true;
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+
+    configPackages = [
+      pkgs.hyprland
+    ];
+  };
+
   wayland.windowManager.hyprland = {
     enable = is-desktop && is-linux;
     systemd.enable = true;

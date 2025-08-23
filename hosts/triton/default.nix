@@ -1,8 +1,9 @@
 {
   imports = [
-    ./home.nix
     ./hardware.nix
   ];
+
+  networking.hostName = "triton";
 
   nixpkgs.hostPlatform = "x86_64-linux";
   home-manager.users.rmu = import ./home.nix;
@@ -12,6 +13,7 @@
 
   users.users.rmu = {
     isNormalUser = true;
+    initialPassword = "makebarty";
     extraGroups = [ "wheel" ];
   };
 
@@ -22,12 +24,6 @@
 
   services.openssh.enable = true;
   services.xserver.enable = true;
-
-  programs.xwayland.enable = true;
-  xdg.portal = {
-    enable = true;
-    config.common.default = "*";
-  };
 
   system.stateVersion = "25.05";
 }

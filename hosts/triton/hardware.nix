@@ -7,7 +7,7 @@
       "zenpower"
       "kvm-amd"
     ];
-    availableKernelModules = [
+    initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
       "ahci"
@@ -33,8 +33,14 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       nvidiaSettings = true;
+
       modesetting.enable = true;
       powerManagement.finegrained = true;
+
+      prime.offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
 
     cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;

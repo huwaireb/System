@@ -1,5 +1,8 @@
 {
-  imports = [ ../../modules/home ];
+  imports = [
+    ../../modules/home
+    ../modules/home/wallpaper
+  ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
 
