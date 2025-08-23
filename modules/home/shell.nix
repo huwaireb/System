@@ -13,9 +13,9 @@
   programs.fish = {
     enable = true;
 
-    shellAliases.x = toString (
-      pkgs.writeScript "emacsclient" ''${config.programs.emacs.finalPackage}/bin/emacsclient -c "$@"''
-    );
+    # shellAliases.x = toString (
+    #   pkgs.writeScript "emacsclient" ''${config.programs.emacs.finalPackage}/bin/emacsclient -c "$@"''
+    # );
 
     shellInit = ''
       set fish_greeting

@@ -30,24 +30,23 @@
     graphics.enable = true;
     nvidia = {
       open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
 
       nvidiaSettings = true;
 
       modesetting.enable = true;
-      powerManagement.enable = true;
     };
 
-    cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+    cpu.amd.updateMicrocode = true;
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/670e2eaf-b150-4e63-b265-63931ffe00a5";
+    device = "/dev/disk/by-label/NIXOS";
     fsType = "xfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5202-B442";
+    device = "/dev/disk/by-label/EFIBOOT";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -68,8 +67,11 @@
     };
   };
 
-  nixpkgs = {
-    hostPlatform = "x86_64-linux";
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "nvidia-x11" ];
-  };
+  nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
 }

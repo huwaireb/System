@@ -23,7 +23,7 @@ in
 
   nix = {
     enable = true;
-    package = inputs.nix.packages.${pkgs.system}.default;
+    package = lib.mkIf stdenv.isDarwin inputs.nix.packages.${pkgs.system}.default;
 
     channel.enable = false;
     optimise.automatic = true;
