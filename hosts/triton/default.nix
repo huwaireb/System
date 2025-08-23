@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -24,6 +25,20 @@
 
   services.openssh.enable = true;
   services.xserver.enable = true;
+
+  programs.xwayland.enable = true;
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+
+    configPackages = [
+      pkgs.hyprland
+    ];
+  };
 
   system.stateVersion = "25.05";
 }
