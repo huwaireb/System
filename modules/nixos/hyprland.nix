@@ -10,7 +10,7 @@ in
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
-  environmentPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     grim
     slurp
     swappy
@@ -35,9 +35,19 @@ in
     ];
   };
 
+  services.greetd.settings = {
+    enable = true;
+    default_session = {
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd hyprland";
+      user = "greeter";
+    };
+  };
+
   home-manager.sharedModules = [
     {
       wayland.windowManager.hyprland = {
+        enable = true;
+
         systemd.enable = true;
         systemd.enableXdgAutostart = true;
 
