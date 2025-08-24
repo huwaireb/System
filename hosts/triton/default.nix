@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -14,6 +15,7 @@
     isNormalUser = true;
     initialPassword = "makebarty";
     extraGroups = [ "wheel" ];
+    shell = pkgs.fish;
   };
 
   services.pipewire = {

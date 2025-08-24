@@ -40,12 +40,12 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXOS";
+    device = "/dev/disk/by-uuid/b4fcbac0-9677-4eba-bdb3-e9886dea3988";
     fsType = "xfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/EFIBOOT";
+    device = "/dev/disk/by-uuid/41F7-73F7";
     fsType = "vfat";
     options = [
       "fmask=0022"

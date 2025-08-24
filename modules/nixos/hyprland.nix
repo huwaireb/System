@@ -7,6 +7,9 @@ let
   inherit (lib) flatten;
 in
 {
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.hyprland.enableGnomeKeyring = true;
+
   environmentPackages = with pkgs; [
     grim
     slurp

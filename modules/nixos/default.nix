@@ -1,7 +1,6 @@
 {
   imports = [ ./kernel.nix ];
 
-  users.mutableUsers = false;
   boot.tmp.cleanOnBoot = true;
 
   security.sudo.enable = true;
