@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware.nix
+    ../../modules/nixos/wayland.nix
     ../../modules/nixos/hyprland.nix
   ];
 

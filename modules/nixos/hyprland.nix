@@ -10,18 +10,6 @@ in
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
-  environment.systemPackages = with pkgs; [
-    grim
-    slurp
-    swappy
-    swaybg
-    wl-clipboard
-    wtype
-    xdg-utils
-    kdePackages.xwaylandvideobridge
-  ];
-
-  programs.xwayland.enable = true;
   xdg.portal = {
     enable = true;
     config.common.default = "*";
@@ -33,14 +21,6 @@ in
     configPackages = [
       pkgs.hyprland
     ];
-  };
-
-  services.greetd.settings = {
-    enable = true;
-    default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd hyprland";
-      user = "greeter";
-    };
   };
 
   home-manager.sharedModules = [
