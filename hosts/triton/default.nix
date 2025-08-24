@@ -1,16 +1,15 @@
-{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
+    ../../modules/nixos/hyprland.nix
   ];
-
-  networking.hostName = "triton";
-
-  home-manager.users.rmu = import ./home.nix;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  networking.hostName = "triton";
+
+  home-manager.users.rmu = import ./home.nix;
   users.users.rmu = {
     isNormalUser = true;
     initialPassword = "makebarty";
@@ -23,21 +22,6 @@
   };
 
   services.openssh.enable = true;
-  services.xserver.enable = true;
-
-  programs.xwayland.enable = true;
-  xdg.portal = {
-    enable = true;
-    config.common.default = "*";
-
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-    ];
-
-    configPackages = [
-      pkgs.hyprland
-    ];
-  };
 
   system.stateVersion = "25.05";
 }

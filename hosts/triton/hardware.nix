@@ -31,10 +31,9 @@
     nvidia = {
       open = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
-
       nvidiaSettings = true;
-
       modesetting.enable = true;
+      powerManagement.enable = true;
     };
 
     cpu.amd.updateMicrocode = true;

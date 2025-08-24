@@ -4,6 +4,9 @@
   config,
   ...
 }:
+let
+  is-desktop = config.type == "desktop";
+in
 {
   imports = [
     ../system.nix
@@ -22,7 +25,7 @@
     ./browser.nix
   ];
 
-  home.packages = lib.mkIf (config.type == "desktop") (
+  home.packages = lib.mkIf is-desktop (
     with pkgs;
     [
       iosevka
@@ -34,6 +37,6 @@
     ]
   );
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = is-desktop;
   programs.home-manager.enable = true;
 }

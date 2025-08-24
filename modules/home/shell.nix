@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  inherit (lib) mkIf;
+in
 {
   xdg.configFile."fish/themes/impaled-nazarene.theme".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/metalelf0/black-metal-theme-neovim/1838337ce73a8de38e81bc40abe54f07b2380273/extras/fish_themes/impaled-nazarene.theme";
@@ -13,9 +16,11 @@
   programs.fish = {
     enable = true;
 
-    # shellAliases.x = toString (
-    #   pkgs.writeScript "emacsclient" ''${config.programs.emacs.finalPackage}/bin/emacsclient -c "$@"''
-    # );
+    shellAliases.x =
+      mkIf config.programs.emacs.enable
+      <| toString (
+        pkgs.writeScript "emacsclient" ''${config.programs.emacs.finalPackage}/bin/emacsclient -c "$@"''
+      );
 
     shellInit = ''
       set fish_greeting

@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (pkgs) stdenv writeScript writeScriptBin;
+  inherit (lib) mkIf;
+  inherit (pkgs) stdenv writeScriptBin;
   cfg = config.programs.emacs;
 in
 {
@@ -139,15 +140,15 @@ in
     e.gptel
   ];
 
-  # services.emacs = {
-  #   inherit (cfg) enable;
-  #   # Get the Emacs icon on Darwin by executing the app located inside the bundle
-  #   package =
-  #     if stdenv.isDarwin then
-  #       writeScriptBin "emacs" ''
-  #         exec ${cfg.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs "$@"
-  #       ''
-  #     else
-  #       cfg.finalPackage;
-  # };
+  services.emacs = mkIf cfg.enable {
+    inherit (cfg) enable;
+    # Get the Emacs icon on Darwin by executing the app located inside the bundle
+    package =
+      if stdenv.isDarwin then
+        writeScriptBin "emacs" ''
+          exec ${cfg.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs "$@"
+        ''
+      else
+        cfg.finalPackage;
+  };
 }
