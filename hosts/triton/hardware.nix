@@ -72,5 +72,7 @@
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
+      "gateway"
+      "idea-ultimate"
     ];
 }

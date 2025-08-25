@@ -1,6 +1,12 @@
+{ lib, pkgs, ... }:
 {
   imports = [
     ../../modules/home
+  ];
+
+  home.packages = with pkgs; [
+    jetbrains.gateway
+    jetbrains.idea-ultimate
   ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
