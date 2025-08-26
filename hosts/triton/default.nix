@@ -2,8 +2,7 @@
 {
   imports = [
     ./hardware.nix
-    ../../modules/nixos/wayland.nix
-    ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/wayland
   ];
 
   boot.loader.systemd-boot.enable = true;

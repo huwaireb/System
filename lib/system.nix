@@ -19,6 +19,8 @@ in
         ../modules/nixos
 
         home-manager.nixosModules.home-manager
+
+        { home-manager.extraSpecialArgs = specialArgs; }
       ];
     };
 
@@ -32,6 +34,8 @@ in
         ../modules/darwin
 
         home-manager.darwinModules.home-manager
+
+        { home-manager.extraSpecialArgs = specialArgs; }
       ];
     };
 }

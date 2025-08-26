@@ -27,13 +27,18 @@
   hardware = {
     enableRedistributableFirmware = true;
 
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Experimental = true;
+    };
+
     graphics.enable = true;
     nvidia = {
       open = true;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
       nvidiaSettings = true;
       modesetting.enable = true;
-      powerManagement.enable = true;
     };
 
     cpu.amd.updateMicrocode = true;

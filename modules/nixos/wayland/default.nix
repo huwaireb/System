@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  # imports = [ ./dunst.nix ];
+  imports = [
+    ./dunst.nix
+    ./hyprland.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     grim

@@ -26,8 +26,6 @@ in
   home-manager.sharedModules = [
     {
       wayland.windowManager.hyprland = {
-        enable = true;
-
         systemd.enable = true;
         systemd.enableXdgAutostart = true;
 
