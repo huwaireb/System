@@ -90,6 +90,11 @@ in
             ];
           };
 
+          decoration = {
+            rounding = 20;
+            shadow.range = 8;
+          };
+
           misc = {
             animate_manual_resizes = true;
 

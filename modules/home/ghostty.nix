@@ -23,7 +23,7 @@ in
 
     settings = {
       font-family = "Iosevka Nerd Font";
-      font-size = 24;
+      font-size = 16;
 
       theme = "tokyonight";
 
