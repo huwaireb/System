@@ -1,5 +1,8 @@
 {
-  imports = [ ./kernel.nix ];
+  imports = [
+    ./gtk.nix
+    ./kernel.nix
+  ];
 
   boot.tmp.cleanOnBoot = true;
 
