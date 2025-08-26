@@ -14,6 +14,8 @@
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
+    exec = [ "pkill swaybg; swaybg --image ${./wallpaper.jpg}" ];
+
     monitor = [
       "DP-2, 3440x1440@175, auto, 1, cm, hdr, vrr, 1, bitdepth, 10"
     ];
