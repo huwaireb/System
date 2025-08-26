@@ -17,7 +17,7 @@
     exec = [ "pkill swaybg; swaybg --image ${./wallpaper.jpg}" ];
 
     monitor = [
-      "DP-2, 3440x1440@175, auto, 1, cm, hdr, vrr, 1, bitdepth, 10"
+      "DP-2, 3440x1440@175, auto, 1, cm, hdr, vrr, 0, bitdepth, 10"
     ];
 
     env = [

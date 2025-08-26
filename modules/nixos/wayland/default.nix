@@ -12,6 +12,7 @@
     swaybg
     wl-clipboard
     wtype
+    hyprpicker
     xdg-utils
     kdePackages.xwaylandvideobridge
   ];

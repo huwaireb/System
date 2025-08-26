@@ -25,7 +25,7 @@ in
       font-family = "Iosevka Nerd Font";
       font-size = 24;
 
-      theme = "Black Metal";
+      theme = "tokyonight";
 
       background-opacity = 0.8;
       background-blur-radius = 80;
