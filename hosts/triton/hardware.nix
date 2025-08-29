@@ -1,10 +1,9 @@
-{ config, lib, ... }:
+{ config, ... }:
 {
 
   boot = {
     kernelParams = [ "amd_pstate=active" ];
     kernelModules = [
-      "zenpower"
       "kvm-amd"
     ];
     initrd.availableKernelModules = [
@@ -15,8 +14,6 @@
       "usbhid"
       "sd_mod"
     ];
-    blacklistedKernelModules = [ "k10temp" ];
-    extraModulePackages = [ config.boot.kernelPackages.zenpower ];
   };
 
   services = {
