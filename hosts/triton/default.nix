@@ -25,5 +25,12 @@
 
   services.openssh.enable = true;
 
+  programs.steam.enable = true;
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+
   system.stateVersion = "25.05";
 }

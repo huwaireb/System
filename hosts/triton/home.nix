@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     jetbrains.gateway
     jetbrains.idea-ultimate
+    (blender.override { cudaSupport = true; })
   ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;

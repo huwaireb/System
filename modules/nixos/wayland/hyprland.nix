@@ -7,6 +7,8 @@ let
   inherit (lib) range flatten;
 in
 {
+  imports = [ ./fuzzel.nix ];
+
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
@@ -48,6 +50,8 @@ in
             "SUPER      , F, fullscreen"
             "SUPER+SHIFT, F, togglefloating"
 
+            "SUPER, SPACE, exec, pkill fuzzel; fuzzel"
+
             "SUPER, RETURN, exec, ghostty --gtk-single-instance=true"
             "SUPER, C     , exec, hyprpicker --autocopy"
 
@@ -73,10 +77,23 @@ in
             "SUPER, mouse:273, resizewindow"
           ];
 
+          bindle = [
+            ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPrev, exec, playerctl previous"
+
+            ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.5"
+            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ];
+
           general = {
             gaps_in = 5;
             gaps_out = 10;
             border_size = 0;
+          };
+
+          input = {
+            scroll_method = "on_button_down";
+            scroll_button = 274;
           };
 
           animations = {

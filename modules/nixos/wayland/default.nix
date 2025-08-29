@@ -13,6 +13,7 @@
     wl-clipboard
     wtype
     hyprpicker
+    playerctl
     xdg-utils
     kdePackages.xwaylandvideobridge
   ];

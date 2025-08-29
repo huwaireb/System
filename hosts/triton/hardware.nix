@@ -72,12 +72,5 @@
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "gateway"
-      "idea-ultimate"
-    ];
+  nixpkgs.config.allowUnfree = true;
 }
