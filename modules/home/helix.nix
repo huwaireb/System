@@ -34,7 +34,6 @@
         language-servers = [ "clangd" ];
         auto-format = true;
       }
-
       {
         name = "cpp";
         auto-format = true;
@@ -44,6 +43,15 @@
           "hh"
           "hpp"
           "ccm"
+        ];
+      }
+      {
+        name = "ini";
+        file-types = [
+          "ini"
+          "desktop"
+          { glob = ".editorconfig"; }
+          { glob = ".buckconfig"; }
         ];
       }
     ];
