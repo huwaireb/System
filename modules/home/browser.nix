@@ -110,7 +110,7 @@ in
   home.sessionVariables.BROWSER = "zen";
 
   programs.zen-browser = {
-    enable = is-desktop;
+    enable = is-desktop && pkgs.stdenv.isLinux;
     inherit policies;
 
     profiles."default".containersForce = true;
