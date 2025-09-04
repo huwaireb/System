@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   user = {
     name = "Rashid J. Almheiri";
@@ -6,6 +11,8 @@ let
   };
 in
 {
+  home.packages = [ pkgs.difftastic ];
+
   programs.mergiraf.enable = true;
   programs.git = {
     enable = true;
@@ -59,7 +66,7 @@ in
   programs.jujutsu = {
     enable = true;
     settings = {
-      core.fsmonitor = "watchman";
+      fsmonitor.backend = "watchman";
 
       inherit user;
 
@@ -72,11 +79,11 @@ in
 
       ui = {
         editor = "hx";
-        pager = "delta";
 
         log-word-wrap = true;
 
-        diff.tool = [
+        diff-editor = ":builtin";
+        diff-formatter = [
           "difft"
           "--color=always"
           "$left"
