@@ -21,7 +21,8 @@ in
     userEmail = user.email;
 
     aliases.st = "status";
-    patdiff.enable = true;
+    difftastic.enable = true;
+    difftastic.background = "dark";
 
     signing = {
       key = "~/.ssh/id";
