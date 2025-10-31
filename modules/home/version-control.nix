@@ -14,15 +14,15 @@ in
   home.packages = [ pkgs.difftastic ];
 
   programs.mergiraf.enable = true;
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+    options.background = "dark";
+  };
+
   programs.git = {
     enable = true;
-
-    userName = user.name;
-    userEmail = user.email;
-
-    aliases.st = "status";
-    difftastic.enable = true;
-    difftastic.background = "dark";
 
     signing = {
       key = "~/.ssh/id";
@@ -30,10 +30,20 @@ in
       signByDefault = true;
     };
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = user.name;
+        email = user.email;
+      };
+
+      alias.st = "status";
+
       init.defaultBranch = "trunk";
 
-      commit.verbose = true;
+      commit = {
+        verbose = true;
+        gpgSign = true;
+      };
 
       log.date = "iso";
 
@@ -41,7 +51,10 @@ in
 
       branch.sort = "-committerdate";
 
-      tag.sort = "version:refname";
+      tag = {
+        sort = "version:refname";
+        gpgSign = true;
+      };
 
       diff = {
         algorithm = "histogram";
@@ -53,18 +66,12 @@ in
         autoSetupRemote = true;
       };
 
-      merge.conflictStyle = "zdiff3";
-
       rebase = {
         autoSquash = true;
         autoStash = true;
         updateRefs = true;
         rerere.enabled = true;
       };
-
-      commit.gpgSign = true;
-
-      tag.gpgSign = true;
     };
   };
 

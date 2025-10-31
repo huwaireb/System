@@ -6,7 +6,7 @@
 
   xdg.configFile."emacs/init.el".source = ./init.el;
 
-  programs.emacs.enable = true;
+  programs.emacs.enable = false;
   programs.zed-editor.enable = true;
 
   services.wallpaper = {

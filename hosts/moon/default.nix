@@ -23,12 +23,11 @@ in
   system = {
     stateVersion = 5;
     defaults.dock.persistent-apps = [
-      { app = "/Applications/Dia.app"; }
+      { app = "/Applications/Helium.app"; }
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
       { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
-      { app = "/Applications/Xcode-beta.app/"; }
 
       { app = "/Applications/Discord.app"; }
       { app = "/Applications/WhatsApp.app"; }

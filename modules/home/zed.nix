@@ -1,5 +1,7 @@
+{ pkgs, ... }:
 {
   programs.zed-editor = {
+    installRemoteServer = pkgs.stdenv.isLinux;
     userSettings = {
       theme = "Catppuccin Espresso (Blur)";
       project_panel.dock = "right";
@@ -63,6 +65,7 @@
       "zig"
       "ocaml"
       "nix"
+      "catpuccin-blur"
     ];
   };
 }
