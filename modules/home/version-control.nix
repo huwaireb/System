@@ -36,9 +36,11 @@ in
       commit.verbose = true;
 
       log.date = "iso";
+
       column.ui = "auto";
 
       branch.sort = "-committerdate";
+
       tag.sort = "version:refname";
 
       diff = {
@@ -52,6 +54,7 @@ in
       };
 
       merge.conflictStyle = "zdiff3";
+
       rebase = {
         autoSquash = true;
         autoStash = true;
@@ -60,6 +63,7 @@ in
       };
 
       commit.gpgSign = true;
+
       tag.gpgSign = true;
     };
   };
