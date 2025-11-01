@@ -85,7 +85,7 @@ in
       signing = {
         behavior = "own";
         backend = "ssh";
-        key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+        key = "${config.home.homeDirectory}/.ssh/id.pub";
         backends.ssh.allowed-signers = "${config.home.homeDirectory}/.ssh/allowed_signers";
       };
 

@@ -17,3 +17,8 @@
 # Host assets
 !*.jpg
 !*.heic
+
+# Printer Drivers
+!*.ppd
+
+!rastertogtp

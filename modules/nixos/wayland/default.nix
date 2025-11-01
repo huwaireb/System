@@ -15,7 +15,6 @@
     hyprpicker
     playerctl
     xdg-utils
-    kdePackages.xwaylandvideobridge
   ];
 
   services.xserver = {
