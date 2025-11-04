@@ -25,7 +25,7 @@ in
       font-family = "Iosevka Nerd Font";
       font-size = 16;
 
-      theme = "tokyonight";
+      theme = "TokyoNight";
 
       background-opacity = 0.8;
       background-blur-radius = 80;
