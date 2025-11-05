@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     jetbrains.gateway
     jetbrains.idea-ultimate
+    kicad
   ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
@@ -27,6 +28,8 @@
       "NVD_BACKEND,direct"
     ];
   };
+
+  programs.lan-mouse.enable = true;
 
   home.stateVersion = "25.05";
 }
