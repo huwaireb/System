@@ -20,6 +20,9 @@
       # The MacOS version of WhatsApp in nixpkgs, "whatsapp-for-mac"
       # fails to download with a 404.
       "whatsapp"
+
+      # Not in nixpkgs
+      "autodesk-fusion"
     ];
   };
 }

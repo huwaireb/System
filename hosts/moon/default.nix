@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   inherit (pkgs) fish;
 in
@@ -33,4 +33,6 @@ in
       { app = "/Applications/WhatsApp.app"; }
     ];
   };
+
+  services.tailscale.enable = true;
 }

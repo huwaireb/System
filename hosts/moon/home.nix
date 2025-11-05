@@ -1,3 +1,4 @@
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../../modules/home
@@ -13,8 +14,6 @@
     enable = true;
     path = ./wallpaper.heic;
   };
-
-  programs.lan-mouse.enable = true;
 
   home.stateVersion = "23.11";
 }
