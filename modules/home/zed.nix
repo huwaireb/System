@@ -22,7 +22,7 @@
         use_smartcase_find = true;
       };
 
-      features.edit_prediction_provider = "copilot";
+      features.edit_prediction_provider = "zed";
 
       terminal = {
         line_height = "standard";
@@ -41,13 +41,7 @@
 
       languages.Starlark.formatter = [ { external.command = "buildifier"; } ];
 
-      agent = {
-        enabled = true;
-        default_model = {
-          provider = "copilot_chat";
-          model = "claude-sonnet-4";
-        };
-      };
+      agent.enabled = true;
 
       inlay_hints.enabled = true;
 
