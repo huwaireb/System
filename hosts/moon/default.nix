@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   inherit (pkgs) fish;
 in
@@ -35,4 +35,6 @@ in
   };
 
   services.tailscale.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 }

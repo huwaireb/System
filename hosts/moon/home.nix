@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ../../modules/home
@@ -13,6 +14,11 @@
     enable = true;
     path = ./wallpaper.heic;
   };
+
+  home.packages = [
+    pkgs.moonlight-qt
+    pkgs.jetbrains-toolbox
+  ];
 
   home.stateVersion = "23.11";
 }

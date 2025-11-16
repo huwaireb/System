@@ -23,6 +23,9 @@
 
       # Not in nixpkgs
       "autodesk-fusion"
+
+      # Not in nixpkgs
+      "cleanshot"
     ];
   };
 }
