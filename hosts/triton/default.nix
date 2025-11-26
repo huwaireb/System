@@ -47,7 +47,17 @@
     tailscale
     virt-manager
     qemu
+    claude-code
+    nodejs
   ];
+
+  services.sunshine = {
+    enable = true;
+    autoStart = false;
+    capSysAdmin = true;
+    openFirewall = true;
+    settings.origin_web_ui_allowed = "wan";
+  };
 
   networking.firewall = {
     enable = true;

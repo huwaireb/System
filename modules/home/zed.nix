@@ -41,6 +41,14 @@
 
       languages.Starlark.formatter = [ { external.command = "buildifier"; } ];
 
+      lsp."protobuf-language-server".binary = {
+        path = "buf";
+        arguments = [
+          "lsp"
+          "serve"
+        ];
+      };
+
       agent.enabled = true;
 
       inlay_hints.enabled = true;
@@ -59,7 +67,8 @@
       "zig"
       "ocaml"
       "nix"
-      "catpuccin-blur"
+      "proto"
+      "zed-catpuccin-blur"
     ];
   };
 }

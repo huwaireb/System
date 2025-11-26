@@ -5,9 +5,10 @@
   ];
 
   home.packages = with pkgs; [
+    kicad
+
     jetbrains.gateway
     jetbrains.idea-ultimate
-    kicad
   ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
