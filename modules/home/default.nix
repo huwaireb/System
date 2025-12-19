@@ -24,8 +24,6 @@ in
     ./zed.nix
     ./ghostty.nix
     ./browser.nix
-
-    inputs.lan-mouse.homeManagerModules.default
   ];
 
   home.packages = lib.mkIf is-desktop (

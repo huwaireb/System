@@ -3,6 +3,7 @@ inputs@{
   nixpkgs,
   darwin,
   home-manager,
+  nix-ld,
   ...
 }:
 let
@@ -18,6 +19,7 @@ in
         ../modules
         ../modules/nixos
 
+        nix-ld.nixosModules.nix-ld
         home-manager.nixosModules.home-manager
 
         { home-manager.extraSpecialArgs = specialArgs; }

@@ -36,9 +36,8 @@
       url = "github:DeterminateSystems/nix-src";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    lan-mouse = {
-      url = "github:feschber/lan-mouse";
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
