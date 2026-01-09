@@ -65,8 +65,6 @@
     tailscale
     virt-manager
     qemu
-    claude-code
-    nodejs
   ];
 
   services.sunshine = {
