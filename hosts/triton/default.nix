@@ -12,6 +12,23 @@
 
   networking.enableIPv6 = false;
   networking.hostName = "triton";
+  networking.wireguard.interfaces.wg0 = {
+    ips = [ "10.10.10.7/24" ];
+    listenPort = 51820;
+    privateKeyFile = "/var/secrets/wg0";
+
+    peers = [
+      {
+        publicKey = "4hXlp6yqQNbmnb/ROQko5lGG6zUS9qpRio3l1tCO5yQ=";
+        allowedIPs = [
+          "10.10.10.0/24"
+          "10.10.10.3/32"
+        ];
+        endpoint = "vpn.trio.ae:51820";
+        persistentKeepalive = 25;
+      }
+    ];
+  };
 
   home-manager.users.rmu = import ./home.nix;
   users.users.rmu = {
@@ -25,6 +42,7 @@
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBMRKAc1asly75a8w7LNkOBFYdskjWOgLAJ09lc7W7tVZbvsNOcDh+3FB8MG+Zkl6jrYbQ541SsfOiRZ6FCUIV2MAAAALaWRAYmxpbmsuc2g= user@ipad"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFM0CwQ/afmHExkS2LtUEuJ1q/Uz9PKBbo1fVd2wiEI1 pub@rmu.ae"
     ];
   };
 
@@ -75,6 +93,7 @@
       config.services.tailscale.port
       5353
       11434
+      51820
     ];
   };
 

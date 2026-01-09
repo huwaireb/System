@@ -8,6 +8,7 @@
     kicad
 
     jetbrains-toolbox
+    jetbrains.idea
   ];
 
   xdg.configFile."emacs/init.el".source = ./init.el;
