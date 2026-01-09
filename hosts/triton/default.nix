@@ -97,7 +97,7 @@
     ];
   };
 
-  programs.nix-ld.dev.enable = true;
+  programs.nix-ld.enable = true;
 
   system.stateVersion = "25.05";
 }
