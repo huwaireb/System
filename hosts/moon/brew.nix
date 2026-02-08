@@ -4,8 +4,8 @@
 
     global.brewfile = true;
 
-    # Get Xcode from the Apple Store (TODO: Re-enable when 26 is stable)
-    # masApps.Xcode = 497799835;
+    masApps.Xcode = 497799835;
+    masApps.parallels = 1085114709;
 
     casks = [
       # For some reason needs to update on every open when downloaded using nixpkgs
