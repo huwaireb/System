@@ -7,6 +7,8 @@
     masApps.Xcode = 497799835;
     masApps.parallels = 1085114709;
 
+    brews = [ "esphome" ];
+
     casks = [
       # For some reason needs to update on every open when downloaded using nixpkgs
       "discord"
@@ -26,6 +28,9 @@
 
       # Not in nixpkgs
       "cleanshot"
+
+      # Breaks in nixpkgs
+      "zed@preview"
     ];
   };
 }

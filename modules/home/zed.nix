@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+let
+  inherit (pkgs) stdenv writeScriptBin;
+  is-darwin = stdenv.hostPlatform.isDarwin;
+in
 {
   programs.zed-editor = {
+    package = lib.mkIf is-darwin (writeScriptBin "not-zed" "");
     installRemoteServer = pkgs.stdenv.isLinux;
     userSettings = {
       theme = "Catppuccin Espresso (Blur)";

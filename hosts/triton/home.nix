@@ -14,8 +14,6 @@
   xdg.configFile."emacs/init.el".source = ./init.el;
   programs.emacs.enable = false;
 
-  programs.zed-editor.enable = true;
-
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     exec = [ "pkill swaybg; swaybg --image ${./wallpaper.jpg}" ];

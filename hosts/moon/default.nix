@@ -27,7 +27,6 @@ in
       { app = "/System/Applications/Music.app"; }
 
       { app = "/Applications/Ghostty.app"; }
-      { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
 
       { app = "/Applications/Discord.app"; }
       { app = "/Applications/WhatsApp.app"; }
