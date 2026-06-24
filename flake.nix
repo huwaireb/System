@@ -51,7 +51,7 @@
 
       nixosConfigurations.carbon = lib.nixosSystem' {
         type = "desktop";
-        imports = [ ./hosts/triton ];
+        imports = [ ./hosts/carbon ];
       };
     };
 }
