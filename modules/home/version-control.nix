@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -13,7 +12,11 @@ in
 {
   home.packages = [ pkgs.difftastic ];
 
-  programs.mergiraf.enable = true;
+  programs.mergiraf = {
+    enable = true;
+    enableGitIntegration = true;
+    enableJujutsuIntegration = true;
+  };
 
   programs.difftastic = {
     enable = true;

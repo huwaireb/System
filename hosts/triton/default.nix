@@ -65,6 +65,7 @@
     tailscale
     virt-manager
     qemu
+    chromium
   ];
 
   services.sunshine = {
@@ -94,6 +95,8 @@
       51820
     ];
   };
+
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   programs.nix-ld.enable = true;
 

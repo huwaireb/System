@@ -17,7 +17,7 @@ in
     ]
     ++ lib.optionals is-desktop [
       nixd
-      nixfmt-rfc-style
+      nixfmt
     ];
 
   programs.fzf = {
