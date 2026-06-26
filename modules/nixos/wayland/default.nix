@@ -2,7 +2,7 @@
 {
   imports = [
     ./dunst.nix
-    ./hyprland.nix
+    ./hyprland
   ];
 
   environment.systemPackages = with pkgs; [

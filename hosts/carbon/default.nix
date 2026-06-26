@@ -11,6 +11,8 @@
   networking.enableIPv6 = false;
   networking.hostName = "carbon";
 
+  networking.networkmanager.enable = true;
+
   home-manager.users.rmu = import ./home.nix;
   users.users.rmu = {
     isNormalUser = true;
@@ -19,6 +21,7 @@
       "wheel"
       "kvm"
       "libvirtd"
+      "networkmanager"
     ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
@@ -51,6 +54,8 @@
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   programs.nix-ld.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "26.05";
 }

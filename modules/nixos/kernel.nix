@@ -1,10 +1,6 @@
-{ config, pkgs, ... }:
-let
-  is-desktop = config.type == "desktop";
-in
+{ pkgs, ... }:
 {
-  boot.kernelPackages =
-    if is-desktop then pkgs.linuxKernel.packages.linux_zen else pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   boot.kernel.sysctl = {
     "kernel.sysrq" = 0;

@@ -11,8 +11,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "thunderbolt"
@@ -52,8 +50,11 @@
 
   services.thermald.enable = true;
 
-  hardware.intelgpu = {
-    driver = "xe";
-    vaapiDriver = "intel-media-driver";
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vpl-gpu-rt
+    ];
   };
 }

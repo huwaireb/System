@@ -5,6 +5,8 @@
     ../../modules/nixos/wayland
   ];
 
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 

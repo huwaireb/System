@@ -8,3 +8,5 @@
 
 # Emacs Modules
 !emacs/**/*.el
+
+!*.lua
