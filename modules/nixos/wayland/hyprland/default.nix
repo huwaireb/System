@@ -9,6 +9,8 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
+  programs.hyprland.enable = true;
+
   xdg.portal = {
     enable = true;
     config.common.default = "*";
