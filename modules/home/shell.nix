@@ -28,6 +28,17 @@ in
       fish_config theme choose impaled-nazarene
     '';
 
+    # Dedicated debug Chromium (isolated profile) with the DevTools port open so
+    # pi's chrome-devtools MCP (attach mode, --browserUrl 127.0.0.1:9222) can
+    # connect. Backgrounded + disowned so it detaches from the launching terminal.
+    functions.chrome-debug = {
+      description = "Launch dedicated debug Chromium (DevTools :9222) for pi's chrome MCP";
+      body = ''
+        chromium --remote-debugging-port=9222 --user-data-dir=$HOME/.chrome-pi $argv >/dev/null 2>&1 &
+        disown
+      '';
+    };
+
     functions.fish_mode_prompt = ""; # Set in fish_prompt
     functions.fish_prompt = ''
       set -l normal (set_color normal)
