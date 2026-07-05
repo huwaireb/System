@@ -10,11 +10,7 @@ lib.mkIf cfg.pi.enable {
   home.file.".pi".source = config.lib.file.mkOutOfStoreSymlink "${cfg.configRoot}/pi";
   home.file.".agents".source = config.lib.file.mkOutOfStoreSymlink "${cfg.configRoot}/agents";
 
-  # Expose pi package CLIs (e.g. hypa, used by pi-hypa's bash rewrite) on PATH so
-  # pi's bash tool can invoke them. This is pi's npm package-bin dir (via ~/.pi).
-  # Done via fish directly: fish doesn't source hm-session-vars.sh, so
-  # home.sessionPath wouldn't reach the shell that launches pi.
-  programs.fish.shellInit = ''
-    fish_add_path --global --prepend "${config.home.homeDirectory}/.pi/agent/npm/node_modules/.bin"
-  '';
+  # NOTE: pi package CLIs live in ~/.pi/agent/npm/node_modules/.bin (e.g. hypa,
+  # used by pi-hypa's bash rewrite). Add that dir to PATH imperatively if needed,
+  # e.g. in fish:  fish_add_path -U ~/.pi/agent/npm/node_modules/.bin
 }
