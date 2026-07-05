@@ -1,0 +1,15 @@
+{
+  "lastChangelogVersion": "0.80.3",
+  "theme": "dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "npm:context-mode",
+    "npm:@hypabolic/pi-hypa",
+    "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-lens"
+  ]
+}
