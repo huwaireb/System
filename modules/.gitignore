@@ -22,6 +22,11 @@
 
 # ...but never secrets or generated files (re-ignored; last match wins)
 home/ai/config/pi/agent/auth.json
+# pi-mcp-adapter runtime state (mcp-oauth/ holds OAuth tokens — secret! mcp.json IS tracked)
+home/ai/config/pi/agent/mcp-oauth/
+home/ai/config/pi/agent/mcp-cache.json
+home/ai/config/pi/agent/mcp-npx-cache.json
+home/ai/config/pi/agent/mcp-onboarding.json
 # pi-managed package store + session transcripts (settings.json IS tracked: it holds the package list)
 home/ai/config/pi/agent/npm/
 home/ai/config/pi/**/sessions/
