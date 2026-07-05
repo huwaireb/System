@@ -1,0 +1,31 @@
+{
+  "mcp": {
+    "toolMode": "proxy",
+    "startup": "lazy",
+    "servers": {
+      "executor": {
+        "type": "remote",
+        "url": "https://exe.mulroy.ai/mcp?elicitation_mode=native"
+      },
+      "cf-portal": {
+        "type": "remote",
+        "url": "https://portal.mcp.cfdata.org/mcp?codemode=search_and_execute",
+        "oauth": {}
+      },
+      "uidotsh": {
+        "type": "remote",
+        "url": "https://ui.sh/mcp?agent=pi",
+        "headers": {
+          "Authorization": "Bearer ${UIDOTSH_TOKEN}"
+        },
+        "oauth": false
+      },
+      "open-computer-use": {
+        "type": "local",
+        "command": ["open-computer-use", "mcp"],
+        "enabled": true,
+        "timeout": 60000
+      }
+    }
+  }
+}
