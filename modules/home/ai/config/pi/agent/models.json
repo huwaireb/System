@@ -4,7 +4,6 @@
       "name": "Z.ai Coding (GLM)",
       "baseUrl": "https://api.z.ai/api/anthropic",
       "api": "anthropic-messages",
-      "apiKey": "$ZAI_API_KEY",
       "models": [
         {
           "id": "glm-5.2",
