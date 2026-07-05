@@ -1,25 +1,13 @@
 {
-  "mcp": {
-    "toolMode": "proxy",
-    "startup": "lazy",
-    "servers": {
-      "open-computer-use": {
-        "type": "local",
-        "command": ["open-computer-use", "mcp"],
-        "enabled": true,
-        "timeout": 60000
-      },
-      "chrome-devtools": {
-        "type": "local",
-        "command": ["npx", "-y", "chrome-devtools-mcp@1.2.0", "--browserUrl=http://127.0.0.1:9222"],
-        "enabled": true,
-        "timeout": 60000
-      },
-      "asana": {
-        "type": "remote",
-        "url": "https://mcp.asana.com/sse",
-        "oauth": {}
-      }
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@1.2.0", "--browserUrl=http://127.0.0.1:9222"]
+    },
+    "asana": {
+      "url": "https://mcp.asana.com/sse",
+      "auth": "oauth"
     }
-  }
+  },
+  "imports": ["claude-code"]
 }

@@ -12,8 +12,9 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-name = "catppuccin"
+name = "tokyo-night"
 
+auto_switch = false
 [theme.custom]
 # Catppuccin Macchiato-inspired overrides matching the tmux theme choices.
 panel_bg = "#24273a"
