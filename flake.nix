@@ -34,11 +34,21 @@
   };
 
   outputs =
-    inputs:
+    inputs@{ nixpkgs, ... }:
     let
       lib = import ./lib inputs;
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
+      packages = forAllSystems (pkgs: import ./packages pkgs);
+
       darwinConfigurations.moon = lib.darwinSystem' {
         type = "desktop";
         imports = [ ./hosts/moon ];

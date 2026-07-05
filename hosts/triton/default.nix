@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  self,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./hardware.nix
@@ -68,6 +73,7 @@
     virt-manager
     qemu
     chromium
+    self.packages.${pkgs.stdenv.hostPlatform.system}.moshi-hook
   ];
 
   services.sunshine = {

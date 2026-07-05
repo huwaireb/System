@@ -4,7 +4,7 @@
   ...
 }:
 {
-  imports = [ ./fuzzel.nix ];
+  imports = [ ../fuzzel.nix ];
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
@@ -25,13 +25,16 @@
   };
 
   home-manager.sharedModules = [
-    {
-      wayland.windowManager.hyprland.enable = false;
+    (
+      { config, pkgs, ... }:
+      {
+        wayland.windowManager.hyprland.enable = false;
 
-      xdg.configFile."hypr/hyprland.lua".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/System/modules/nixos/wayland/hyprland/config.lua";
+        xdg.configFile."hypr/hyprland.lua".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/System/modules/nixos/wayland/hyprland/config.lua";
 
-      home.file.".local/share/hypr/stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
-    }
+        home.file.".local/share/hypr/stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
+      }
+    )
   ];
 }
