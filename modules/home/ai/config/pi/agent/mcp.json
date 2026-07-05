@@ -11,7 +11,7 @@
       },
       "chrome-devtools": {
         "type": "local",
-        "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+        "command": ["npx", "-y", "chrome-devtools-mcp@1.2.0"],
         "enabled": true,
         "timeout": 60000
       },
