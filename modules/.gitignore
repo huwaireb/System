@@ -24,7 +24,8 @@
 home/ai/config/pi/agent/auth.json
 # pi-managed package store + session transcripts (settings.json IS tracked: it holds the package list)
 home/ai/config/pi/agent/npm/
-home/ai/config/pi/agent/sessions/
+home/ai/config/pi/**/sessions/
+home/ai/config/pi/**/*.db
 home/ai/config/**/node_modules/
 home/ai/config/**/package-lock.json
 home/ai/config/**/*-lock.json
