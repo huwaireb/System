@@ -28,9 +28,12 @@
       mode = "5120x1440@240",
       position = "auto",
       scale = 1,
-      cm = "wide",
       vrr = 0,
-      bitdepth = 10,
+      -- cm = "wide" + bitdepth = 10 crash aquamarine's DRM commit on nvidia
+      -- (SIGSEGV in CDRMRenderer::blit during applyMonitorRule) since the
+      -- 2026-07 nixpkgs bump. Re-enable once nvidia+aquamarine 10-bit is fixed.
+      -- cm = "wide",
+      -- bitdepth = 10,
     })
 
     hl.env("LIBVA_DRIVER_NAME", "nvidia")
