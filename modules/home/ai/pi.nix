@@ -12,5 +12,9 @@ lib.mkIf cfg.pi.enable {
 
   # Expose pi package CLIs (e.g. hypa, used by pi-hypa's bash rewrite) on PATH so
   # pi's bash tool can invoke them. This is pi's npm package-bin dir (via ~/.pi).
-  home.sessionPath = [ "${config.home.homeDirectory}/.pi/agent/npm/node_modules/.bin" ];
+  # Done via fish directly: fish doesn't source hm-session-vars.sh, so
+  # home.sessionPath wouldn't reach the shell that launches pi.
+  programs.fish.shellInit = ''
+    fish_add_path --global --prepend "${config.home.homeDirectory}/.pi/agent/npm/node_modules/.bin"
+  '';
 }

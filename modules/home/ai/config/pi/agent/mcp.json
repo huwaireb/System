@@ -2,12 +2,19 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@1.2.0", "--browserUrl=http://127.0.0.1:9222"]
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@1.2.0",
+        "--browserUrl=http://127.0.0.1:9222"
+      ],
+      "directTools": true
     },
     "asana": {
       "url": "https://mcp.asana.com/sse",
       "auth": "oauth"
     }
   },
-  "imports": ["claude-code"]
+  "imports": [
+    "claude-code"
+  ]
 }
