@@ -4,6 +4,13 @@
     ../../modules/home
   ];
 
+  ai = {
+    agents.enable = true;
+    pi.enable = true;
+    herdr.enable = true;
+    moshi.enable = true;
+  };
+
   home.packages = with pkgs; [
     kicad
 
