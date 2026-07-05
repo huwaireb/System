@@ -10,3 +10,20 @@
 !emacs/**/*.el
 
 !*.lua
+
+# AI vendored config (symlink targets — tracked so hosts get the files)
+!home/ai/config/**/*.json
+!home/ai/config/**/*.jsonc
+!home/ai/config/**/*.toml
+!home/ai/config/**/*.md
+!home/ai/config/**/*.ts
+!home/ai/config/**/*.mjs
+!home/ai/config/**/*.sh
+
+# ...but never secrets or generated files (re-ignored; last match wins)
+home/ai/config/pi/agent/auth.json
+home/ai/config/**/node_modules/
+home/ai/config/**/package-lock.json
+home/ai/config/**/*-lock.json
+home/ai/config/**/*skill-lock.json
+home/ai/config/**/release-notes.json

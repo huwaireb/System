@@ -24,6 +24,7 @@ in
     ./zed.nix
     ./ghostty.nix
     ./browser.nix
+    ./ai
   ];
 
   home.packages = lib.mkIf is-desktop (
