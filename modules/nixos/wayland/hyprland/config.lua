@@ -13,6 +13,7 @@ hl.config({
   },
   cursor = { hide_on_key_press = true, inactive_timeout = 10, no_warps = true },
   dwindle = { preserve_split = true, smart_resizing = false },
+  ecosystem = { no_update_news = true },
 })
 
 for i = 1, 7 do
