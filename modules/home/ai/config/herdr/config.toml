@@ -121,8 +121,8 @@ enabled = true
 position = "bottom-center"
 
 [ui.sound]
-# tmux config has no sound notifications.
-enabled = false
+# Notification sound on agent state changes (e.g. blocked).
+enabled = true
 
 [session]
 # Closest analogue to tmux-resurrect for supported coding agents.
