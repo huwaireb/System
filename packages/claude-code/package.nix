@@ -88,27 +88,5 @@ stdenv.mkDerivation (finalAttrs: {
 
   passthru.updateScript = ./update.sh;
 
-  meta = {
-    description = "Agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster";
-    homepage = "https://github.com/anthropics/claude-code";
-    downloadPage = "https://claude.com/product/claude-code";
-    changelog = "https://github.com/anthropics/claude-code/blob/v${finalAttrs.version}/CHANGELOG.md";
-    license = lib.licenses.unfree;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    platforms = [
-      "aarch64-darwin"
-      "aarch64-linux"
-      "x86_64-linux"
-    ];
-    maintainers = with lib.maintainers; [
-      adeci
-      malo
-      markus1189
-      mirkolenz
-      omarjatoi
-      oskarwires
-      xiaoxiangmoe
-    ];
-    mainProgram = "claude";
-  };
+  meta.mainProgram = "claude";
 })
