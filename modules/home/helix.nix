@@ -79,7 +79,7 @@
         true-color = true;
 
         shell = [
-          "nu"
+          "fish"
           "-c"
         ];
 

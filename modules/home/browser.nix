@@ -103,37 +103,5 @@ let
   };
 in
 {
-  imports = [
-    inputs.zen-browser.homeModules.beta
-  ];
-
-  home.sessionVariables.BROWSER = "zen";
-
-  programs.zen-browser = {
-    enable = is-desktop && pkgs.stdenv.isLinux;
-    inherit policies;
-
-    profiles."default".containersForce = true;
-    profiles."default".containers = {
-      Personal = {
-        id = 1;
-        icon = "fingerprint";
-        color = "green";
-      };
-
-      Work = {
-        id = 2;
-        icon = "briefcase";
-        color = "orange";
-      };
-
-      School = {
-        id = 3;
-        icon = "chill";
-        color = "turquoise";
-      };
-    };
-
-    nativeMessagingHosts = [ pkgs.firefoxpwa ];
-  };
+  home.sessionVariables.BROWSER = "chromium";
 }

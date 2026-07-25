@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware.nix
+    ./buzz.nix
     ../../modules/nixos/wayland
   ];
 

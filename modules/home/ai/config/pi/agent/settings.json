@@ -1,15 +1,16 @@
 {
-  "lastChangelogVersion": "0.80.3",
+  "lastChangelogVersion": "0.80.7",
   "theme": "dark",
-  "defaultProvider": "zai",
-  "defaultModel": "glm-5.2",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:context-mode",
-    "npm:@hypabolic/pi-hypa",
     "npm:pi-web-access",
     "npm:pi-mcp-adapter",
     "npm:@ff-labs/pi-fff",
-    "npm:pi-lens"
-  ]
+    "npm:pi-lens",
+    "npm:pi-provider-kimi-code"
+  ],
+  "enableInstallTelemetry": false
 }

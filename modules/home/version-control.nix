@@ -10,7 +10,10 @@ let
   };
 in
 {
-  home.packages = [ pkgs.difftastic ];
+  home.packages = [
+    pkgs.difftastic
+    pkgs.gh
+  ];
 
   programs.mergiraf = {
     enable = true;

@@ -12,6 +12,10 @@
     "asana": {
       "url": "https://mcp.asana.com/sse",
       "auth": "oauth"
+    },
+    "linear": {
+      "url": "https://mcp.linear.app/mcp",
+      "auth": "oauth"
     }
   },
   "imports": [
