@@ -1,6 +1,12 @@
 { lib, config, ... }:
 let
-  inherit (lib) mkEnableOption mkOption mkIf mkDefault types;
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    mkIf
+    mkDefault
+    types
+    ;
   cfg = config.ai;
 in
 {
@@ -20,7 +26,7 @@ in
       description = "Absolute path to the vendored AI config in the repo working tree (symlink target root).";
     };
 
-    agents.enable = mkEnableOption "pi and claude-code agent CLIs";
+    agents.enable = mkEnableOption "AI agent CLIs";
     pi.enable = mkEnableOption "pi config symlinks (~/.pi, ~/.agents) + extension npm install";
     herdr.enable = mkEnableOption "herdr agent multiplexer + config";
     moshi.enable = mkEnableOption "moshi-hook session-pairing daemon (systemd user service)";

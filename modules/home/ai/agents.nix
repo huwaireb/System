@@ -1,15 +1,19 @@
 {
   lib,
   pkgs,
+  self,
   config,
   ...
 }:
+let
+  localPackages = self.packages.${pkgs.stdenv.hostPlatform.system};
+in
 lib.mkIf config.ai.agents.enable {
-  home.packages = with pkgs; [
-    codex
-    codex-acp
-    claude-code
-    claude-code-acp
-    pi-coding-agent # `pi`
+  home.packages = [
+    localPackages.codex
+    localPackages.codex-acp
+    localPackages.claude-code
+    localPackages.claude-code-acp
+    pkgs.pi-coding-agent # `pi`
   ];
 }
