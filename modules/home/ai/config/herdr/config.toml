@@ -104,7 +104,6 @@ mouse_scroll_lines = 3
 # tmux close/kill bindings do not prompt; match that behavior.
 confirm_close = false
 prompt_new_tab_name = true
-agent_panel_scope = "all"
 accent = "#c6a0f6"
 
 show_agent_labels_on_pane_borders = false
