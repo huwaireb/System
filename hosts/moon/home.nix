@@ -10,6 +10,9 @@
   programs.emacs.enable = false;
   programs.zed-editor.enable = true;
 
+  ai.agents.enable = true;
+  ai.herdr.enable = true;
+
   services.wallpaper = {
     enable = true;
     path = ./wallpaper.heic;
