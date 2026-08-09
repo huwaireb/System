@@ -12,21 +12,13 @@ mkIf is-desktop {
   environment.systemPackages = [ pkgs.dconf ];
   home-manager.sharedModules = [
     {
-      gtk = rec {
+      gtk = {
         enable = true;
-        theme = {
-          name = "Tokyonight-Dark";
-          package = pkgs.tokyonight-gtk-theme.override {
-            tweakVariants = [ "macos" ];
-          };
-        };
 
         font = {
           name = "Iosevka Nerd Font";
           size = 16;
         };
-
-        gtk4.theme = theme;
       };
 
       home.pointerCursor = {
