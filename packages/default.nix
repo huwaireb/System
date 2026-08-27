@@ -11,4 +11,5 @@ in
   codex-acp = pkgs.callPackage ./codex-acp/package.nix { };
   moshi-hook = pkgs.callPackage ./moshi-hook/package.nix { };
   grok-build = pkgs.callPackage ./grok-build/package.nix { };
+  executor = pkgs.callPackage ./executor/package.nix { };
 }

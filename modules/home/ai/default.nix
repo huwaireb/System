@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./agents.nix
+    ./executor.nix
     ./herdr.nix
     ./moshi.nix
     ./pi.nix
@@ -30,6 +31,32 @@ in
     pi.enable = mkEnableOption "pi config symlinks (~/.pi, ~/.agents) + extension npm install";
     herdr.enable = mkEnableOption "herdr agent multiplexer + config";
     moshi.enable = mkEnableOption "moshi-hook session-pairing daemon (systemd user service)";
+    executor.enable = mkEnableOption "executor CLI + local daemon (systemd user service)";
+    executor.port = mkOption {
+      type = types.port;
+      default = 4788;
+      description = "Loopback port for the local Executor daemon.";
+    };
+    executor.tailscaleServe = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Expose the daemon on the tailnet with `tailscale serve` (HTTPS, tailnet
+          only). Does not enable Funnel. The daemon stays bound to 127.0.0.1.
+        '';
+      };
+      httpsPort = mkOption {
+        type = types.port;
+        default = 4788;
+        description = "HTTPS port on the MagicDNS name, e.g. https://triton.tail43612.ts.net:4788.";
+      };
+      domain = mkOption {
+        type = types.str;
+        default = "tail43612.ts.net";
+        description = "MagicDNS tailnet suffix used for CORS --allowed-host.";
+      };
+    };
   };
 
   # Convenience: `ai.enable = true` turns on the common set (hosts can still override).

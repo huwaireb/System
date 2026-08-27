@@ -9,6 +9,7 @@
     pi.enable = true;
     herdr.enable = true;
     moshi.enable = true;
+    executor.enable = true;
   };
 
   home.packages = with pkgs; [

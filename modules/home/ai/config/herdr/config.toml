@@ -107,7 +107,7 @@ prompt_new_tab_name = true
 accent = "#c6a0f6"
 
 show_agent_labels_on_pane_borders = false
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 [ui.toast]
 delivery = "herdr"
 delay_seconds = 1
