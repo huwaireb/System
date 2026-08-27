@@ -48,8 +48,11 @@ in
       };
       httpsPort = mkOption {
         type = types.port;
-        default = 4788;
-        description = "HTTPS port on the MagicDNS name, e.g. https://triton.tail43612.ts.net:4788.";
+        default = 443;
+        description = ''
+          HTTPS port on the MagicDNS name. 443 is https://triton.tail43612.ts.net
+          (no port in the URL). Other values become https://host:port.
+        '';
       };
       domain = mkOption {
         type = types.str;
