@@ -16,6 +16,12 @@
     "linear": {
       "url": "https://mcp.linear.app/mcp",
       "auth": "oauth"
+    },
+    "executor": {
+      "url": "https://triton.tail43612.ts.net/mcp",
+      "headers": {
+        "Authorization": "Bearer MpCS6h1rNxSBvBi_aCqN_JRXEUwo3oZHEuIZYaLUxYw"
+      }
     }
   },
   "imports": [

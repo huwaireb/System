@@ -55,6 +55,14 @@
     ];
   };
 
+  # 64 GiB. Size is MiB. XFS root can't shrink, so this is a file.
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 64 * 1024;
+    }
+  ];
+
   networking = {
     useDHCP = false;
     useNetworkd = true;

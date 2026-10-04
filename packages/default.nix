@@ -12,4 +12,5 @@ in
   moshi-hook = pkgs.callPackage ./moshi-hook/package.nix { };
   grok-build = pkgs.callPackage ./grok-build/package.nix { };
   executor = pkgs.callPackage ./executor/package.nix { };
+  opencode = pkgs.callPackage ./opencode/package.nix { };
 }

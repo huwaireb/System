@@ -15,6 +15,7 @@ lib.mkIf config.ai.agents.enable {
     localPackages.claude-code
     localPackages.claude-code-acp
     localPackages.grok-build
+    localPackages.opencode
     pkgs.pi-coding-agent # `pi`
   ];
 }

@@ -4,26 +4,26 @@
   fetchurl,
 }:
 let
-  version = "0.3.1";
+  version = "0.3.26";
 
   # Prebuilt, statically-linked Go binaries distributed via https://cdn.getmoshi.app.
   # Hashes are the upstream checksums.txt values for hook/v${version}.
   sources = {
     "x86_64-linux" = {
       asset = "moshi-hook_Linux_x86_64.tar.gz";
-      hash = "sha256-fvvRgvVKjUTZpUxGuyqbFj1wnNoXJlKnw1dIcW8qag8=";
+      hash = "sha256-AkFhSriCghWYAMr5oKZSMLjpJ+IfAqbTTsws/tx4JVA=";
     };
     "aarch64-linux" = {
       asset = "moshi-hook_Linux_arm64.tar.gz";
-      hash = "sha256-1OQK80n4ueeIqJWod/QPZTQGYIAparnKhORxaB5hu3Q=";
+      hash = "sha256-0QVwP7BT5q9BbnucqdjOOx+0iEQ1haHF6kX9OSukgRg=";
     };
     "x86_64-darwin" = {
       asset = "moshi-hook_Darwin_x86_64.tar.gz";
-      hash = "sha256-XhISXnETz4hcwGXo1Q/X3aojD7EyLOA21PhwVkD9F68=";
+      hash = "sha256-doZeWxB5ZqCs6pfg6b4ePbLAaTDNZAZnKoWYdWlBk2Q=";
     };
     "aarch64-darwin" = {
       asset = "moshi-hook_Darwin_arm64.tar.gz";
-      hash = "sha256-i0xtgMuz2r1QL1gEXgkYoiMVIXYUcR6rxGmtc+RzTXg=";
+      hash = "sha256-tGTRaxIqzlyMNCiKcXmVtPdD45Yc+pJhtbqLYWPX5tw=";
     };
   };
 
