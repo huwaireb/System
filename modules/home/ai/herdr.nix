@@ -9,8 +9,7 @@ let
 in
 lib.mkIf cfg.herdr.enable {
   home.packages = [
-    pkgs.herdr.overrideAttrs
-    (_: rec {
+    (pkgs.herdr.overrideAttrs (_: rec {
       version = "0.9.3";
 
       src = pkgs.fetchFromGitHub {
@@ -21,7 +20,7 @@ lib.mkIf cfg.herdr.enable {
       };
 
       cargoHash = "sha256-+gTWtEheyuI59yf2PqRbcbcFIW+/cYb7zZ2mPv2VN0Y=";
-    })
+    }))
   ];
 
   # Writable symlink: `herdr config reset-keys` / `server reload-config` rewrite this file.
