@@ -12,6 +12,15 @@ lib.mkIf cfg.herdr.enable {
     (pkgs.herdr.overrideAttrs (prev: rec {
       version = "0.9.3";
 
+      # Avoid ld.bfd rejecting overlapping unwind records from the Ghostty build.
+      nativeBuildInputs = (prev.nativeBuildInputs or [ ]) ++ [ pkgs.lld ];
+      env = (prev.env or { }) // {
+        NIX_CFLAGS_LINK = lib.concatStringsSep " " [
+          (prev.env.NIX_CFLAGS_LINK or "")
+          "-fuse-ld=lld"
+        ];
+      };
+
       src = pkgs.fetchFromGitHub {
         owner = "herdrdev";
         repo = "herdr";
