@@ -93,14 +93,12 @@
       80
       443
       631
-      11434
     ];
 
     allowedUDPPorts = [
       631
       config.services.tailscale.port
       5353
-      11434
       51820
     ];
   };

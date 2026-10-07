@@ -3,6 +3,7 @@
   imports = [
     ./gtk.nix
     ./kernel.nix
+    ./oom.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
