@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-# Keep these in sync with `sources` in package.nix.
+# Keep these in sync with `npmPlatform` in package.nix.
 platforms() {
   cat <<'EOF'
 x86_64-linux linux-x64
@@ -33,7 +33,9 @@ replace_assignment() {
   sed -i -E "s|^([[:space:]]*${key} = \")${pattern}[^\"]*(\";)|\1${value}\2|" "$package_nix"
 }
 
-version="${1:-$(curl -fsSL https://registry.npmjs.org/executor/latest | python3 -c 'import json,sys; print(json.load(sys.stdin)["version"])')}"
+# Executor v2 ships on the npm `beta` channel until a stable 2.x lands; point
+# the default at `beta` so `nix run .#executor.updateScript` tracks it.
+version="${1:-$(curl -fsSL https://registry.npmjs.org/executor/beta | python3 -c 'import json,sys; print(json.load(sys.stdin)["version"])')}"
 version="$(printf '%s' "$version" | tr -d '[:space:]')"
 
 current_version="$(sed -n 's/^[[:space:]]*version = "\(.*\)";/\1/p' "$package_nix" | head -n1)"
@@ -50,6 +52,10 @@ fi
 
 echo "updating executor: ${current_version} -> ${version}"
 
+# The base CLI tarball is platform-independent; prefetch it once.
+base_hash="$(prefetch_sri "https://registry.npmjs.org/executor/-/executor-${version}.tgz")"
+echo "prefetched base (${base_hash})"
+
 hashes="$(mktemp)"
 trap 'rm -f "$hashes"' EXIT
 
@@ -60,6 +66,7 @@ while read -r system npm_platform; do
 done < <(platforms)
 
 replace_assignment version "$version" "$current_version"
+replace_assignment baseHash "$base_hash" "sha256-"
 
 while read -r system hash; do
   replace_assignment "$system" "$hash" "sha256-"

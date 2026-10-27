@@ -5,14 +5,22 @@
   autoPatchelfHook,
   makeBinaryWrapper,
   versionCheckHook,
+  nodejs_24,
   gcc,
+  zlib,
+  curl,
+  expat,
+  fontconfig,
 }:
 let
-  version = "1.6.0";
+  version = "2.0.0-beta.17";
 
   throwSystem = throw "executor: unsupported platform ${stdenvNoCC.hostPlatform.system}";
 
-  # npm publishes one platform tarball per `executor@${version}-${npmPlatform}`.
+  # npm publishes the base CLI (`executor@${version}`) plus one "native runtime"
+  # tarball per platform (`executor@${version}-${npmPlatform}`). The base package
+  # aliases the runtime as `executor-<platform>-<arch>` in optionalDependencies
+  # and its `bin.mjs` resolves `${platformPkg}/bin.mjs` from its own node_modules.
   # Keep `npmPlatform` in sync with `platforms()` in update.sh.
   npmPlatform = {
     x86_64-linux = "linux-x64";
@@ -21,51 +29,78 @@ let
     aarch64-darwin = "darwin-arm64";
   };
 
-  hashes = {
-    x86_64-linux = "sha256-GNZfyH3OHEQy+pyfWBb6DUiDpLI6RA6Rl47ZVlXSy1A=";
-    aarch64-linux = "sha256-IB9AgJ7BVCt9T6L6RC0JmelPgT4WzJxVBYjADnS2dDE=";
-    x86_64-darwin = "sha256-hpTmyTinoi7//DreBBtXXlYuih1Kydo7YUwqhBCnNL8=";
-    aarch64-darwin = "sha256-Ti6ELUK4RAt5Y5CrQN1rFKYF/+Y5mgWJliiurTFuoc8=";
+  platform = npmPlatform.${stdenvNoCC.hostPlatform.system} or throwSystem;
+  platformPkg = "executor-${platform}";
+
+  # The base tarball is platform-independent, so it gets one shared hash.
+  baseHash = "sha256-mAqeRbqkhofyXECU6IB9xbePOiZUyFYUiRsdkuTfQss=";
+
+  platformHashes = {
+    x86_64-linux = "sha256-rzjb05xBj1hrtS8LEmT88Ps1Ne1VT5eXv8YBRPDWbJE=";
+    aarch64-linux = "sha256-4iTi3M838dE/CUBJWkPblYqdCQNAaja0qsue8VbrkXc=";
+    x86_64-darwin = "sha256-ZpXe63CNeaV9SFQnPPZxxkjDBhoH1iFVlnQHYxo0u0g=";
+    aarch64-darwin = "sha256-EykY6P1TKw15VVFhI+N59l3r010k/PddEppmUU6AU1w=";
+  };
+
+  base = fetchurl {
+    url = "https://registry.npmjs.org/executor/-/executor-${version}.tgz";
+    hash = baseHash;
+  };
+
+  runtime = fetchurl {
+    url = "https://registry.npmjs.org/executor/-/executor-${version}-${platform}.tgz";
+    hash = platformHashes.${stdenvNoCC.hostPlatform.system} or throwSystem;
   };
 in
 stdenvNoCC.mkDerivation {
   pname = "executor";
   inherit version;
 
-  src = fetchurl {
-    url = "https://registry.npmjs.org/executor/-/executor-${version}-${
-      npmPlatform.${stdenvNoCC.hostPlatform.system} or throwSystem
-    }.tgz";
-    hash = hashes.${stdenvNoCC.hostPlatform.system} or throwSystem;
-  };
-
-  # Native bindings and wasm sidecars are resolved from dirname(process.execPath).
-  # Keep the bun binary and its siblings together; wrap a PATH entry on top.
-  sourceRoot = "package";
-
-  dontConfigure = true;
-  dontBuild = true;
-  # Bun-compiled binaries break when stripped.
-  dontStrip = true;
+  # Two tarballs are unpacked manually in installPhase.
+  src = null;
 
   nativeBuildInputs = [
     makeBinaryWrapper
   ]
   ++ lib.optionals stdenvNoCC.hostPlatform.isElf [ autoPatchelfHook ];
 
-  buildInputs = lib.optionals stdenvNoCC.hostPlatform.isLinux [ gcc.cc.lib ];
+  # The runtime ships prebuilt glibc binaries (workerd, dugite's git, sharp,
+  # keyring) with no usable rpath. autoPatchelf links them against the store's
+  # libc/libstdc++/libz/libcurl (git's http helpers), libexpat (git-http-push)
+  # and fontconfig (the bundled SkiaSharp). The bundled libvips is found via
+  # sharp's own `$ORIGIN` rpath plus the extra search path below.
+  buildInputs = lib.optionals stdenvNoCC.hostPlatform.isLinux [
+    gcc.cc.lib
+    zlib
+    curl
+    expat
+    fontconfig
+  ];
+
+  dontUnpack = true;
+  dontConfigure = true;
+  dontBuild = true;
+  # Native addons (.node, workerd, git) break when stripped.
+  dontStrip = true;
+
+  preFixup = lib.optionalString stdenvNoCC.hostPlatform.isElf ''
+    # sharp's .node links libvips-cpp, which lives in its own sibling package
+    # directory; make sure autoPatchelf can resolve it.
+    addAutoPatchelfSearchPath "$out/lib/node_modules/executor/node_modules/${platformPkg}/node_modules/@img/sharp-libvips-${platform}/lib"
+  '';
 
   installPhase = ''
     runHook preInstall
 
-    mkdir -p "$out/libexec/executor" "$out/bin"
-    cp -a bin/. "$out/libexec/executor/"
-    chmod +x "$out/libexec/executor/executor"
-    if [ -f "$out/libexec/executor/workerd" ]; then
-      chmod +x "$out/libexec/executor/workerd"
-    fi
+    # Reproduce a global npm install layout: the base package plus the aliased
+    # runtime under `executor/node_modules/`, which is how `bin.mjs` resolves it.
+    mkdir -p "$out/lib/node_modules/executor/node_modules" "$out/bin"
+    tar xzf "${base}" --strip-components=1 -C "$out/lib/node_modules/executor"
+    mkdir -p "$out/lib/node_modules/executor/node_modules/${platformPkg}"
+    tar xzf "${runtime}" --strip-components=1 -C "$out/lib/node_modules/executor/node_modules/${platformPkg}"
 
-    makeBinaryWrapper "$out/libexec/executor/executor" "$out/bin/executor"
+    makeBinaryWrapper "${nodejs_24}/bin/node" "$out/bin/executor" \
+      --add-flags "$out/lib/node_modules/executor/bin.mjs"
 
     runHook postInstall
   '';

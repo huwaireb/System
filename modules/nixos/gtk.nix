@@ -22,6 +22,7 @@ mkIf is-desktop {
       };
 
       home.pointerCursor = {
+        enable = true;
         gtk.enable = is-desktop;
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";

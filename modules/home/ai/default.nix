@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./agents.nix
+    ./devreaper.nix
     ./executor.nix
     ./herdr.nix
     ./moshi.nix
@@ -32,10 +33,19 @@ in
     herdr.enable = mkEnableOption "herdr agent multiplexer + config";
     moshi.enable = mkEnableOption "moshi-hook session-pairing daemon (systemd user service)";
     executor.enable = mkEnableOption "executor CLI + local daemon (systemd user service)";
+    devreaper.enable = mkEnableOption "timer that stops agent-started dev servers once idle";
+    devreaper.idleMinutes = mkOption {
+      type = types.ints.positive;
+      default = 30;
+      description = "Minutes a dev-server tree may go without an external client before it is stopped.";
+    };
     executor.port = mkOption {
       type = types.port;
-      default = 4788;
-      description = "Loopback port for the local Executor daemon.";
+      default = 4312;
+      description = ''
+        Loopback port for the local Executor daemon (v2's `EXECUTOR_PORT`;
+        MCP is served over HTTP at /mcp on this port).
+      '';
     };
     executor.tailscaleServe = {
       enable = mkOption {
@@ -57,7 +67,10 @@ in
       domain = mkOption {
         type = types.str;
         default = "tail43612.ts.net";
-        description = "MagicDNS tailnet suffix used for CORS --allowed-host.";
+        description = ''
+          MagicDNS tailnet suffix used for EXECUTOR_BROWSER_ORIGIN so generated
+          links use the tailnet HTTPS origin.
+        '';
       };
     };
   };

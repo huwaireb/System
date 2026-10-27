@@ -11,6 +11,9 @@
 
 !*.lua
 
+# Scripts read by ai modules (builtins.readFile)
+!home/ai/*.py
+
 # AI vendored config (symlink targets — tracked so hosts get the files)
 !home/ai/config/**/*.json
 !home/ai/config/**/*.jsonc

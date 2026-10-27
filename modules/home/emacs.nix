@@ -46,7 +46,7 @@ in
     (setopt load-prefer-newer noninteractive)
 
     ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
-    ${lib.optionalString (!stdenv.isDarwin) "(menu-bar-mode -1)"}
+    ${lib.optionalString (!stdenv.hostPlatform.isDarwin) "(menu-bar-mode -1)"}
     (tool-bar-mode -1)
     (scroll-bar-mode -1)
     (blink-cursor-mode -1)
@@ -86,7 +86,7 @@ in
         };
       in
       (o.postInstall or "")
-      + lib.optionalString stdenv.isDarwin ''
+      + lib.optionalString stdenv.hostPlatform.isDarwin ''
         install -m644 ${darwinIcon} $out/Applications/Emacs.app/Contents/Resources/Emacs.icns
       '';
   });
@@ -144,7 +144,7 @@ in
     inherit (cfg) enable;
     # Get the Emacs icon on Darwin by executing the app located inside the bundle
     package =
-      if stdenv.isDarwin then
+      if stdenv.hostPlatform.isDarwin then
         writeScriptBin "emacs" ''
           exec ${cfg.finalPackage}/Applications/Emacs.app/Contents/MacOS/Emacs "$@"
         ''

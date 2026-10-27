@@ -14,8 +14,6 @@ lib.mkIf config.ai.agents.enable {
     localPackages.codex-acp
     localPackages.claude-code
     localPackages.claude-code-acp
-    localPackages.grok-build
-    localPackages.opencode
-    pkgs.pi-coding-agent # `pi`
+    localPackages.antigravity-cli
   ];
 }

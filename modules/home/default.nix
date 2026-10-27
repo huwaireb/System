@@ -33,7 +33,7 @@ in
       iosevka
       nerd-fonts.iosevka
     ]
-    ++ lib.optionals stdenv.isDarwin [
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
       stats
       alt-tab-macos
     ]

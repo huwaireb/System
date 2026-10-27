@@ -4,18 +4,20 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*" = {
-        controlMaster = "auto";
-        controlPath = "/tmp/ssh-%r@%n:%p";
-        controlPersist = "60m";
-        serverAliveCountMax = 2;
-        serverAliveInterval = 60;
-        compression = true;
-        hashKnownHosts = true;
-        setEnv.COLORTERM = "truecolor";
-        setEnv.TERM = "xterm-256color";
-        identityFile = "~/.ssh/id";
+        ControlMaster = "auto";
+        ControlPath = "/tmp/ssh-%r@%n:%p";
+        ControlPersist = "60m";
+        ServerAliveCountMax = 2;
+        ServerAliveInterval = 60;
+        Compression = true;
+        HashKnownHosts = true;
+        SetEnv = {
+          COLORTERM = "truecolor";
+          TERM = "xterm-256color";
+        };
+        IdentityFile = "~/.ssh/id";
       };
     };
   };

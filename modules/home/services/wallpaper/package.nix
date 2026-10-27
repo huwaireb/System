@@ -25,7 +25,7 @@ stdenv.mkDerivation {
 
   inherit CLANG_FLAGS OBJC_FLAGS;
 
-  buildInputs = lib.optionals stdenv.isDarwin [
+  buildInputs = lib.optionals stdenv.hostPlatform.isDarwin [
     apple-sdk
     (darwinMinVersionHook "10.6") # When setDesktopImageURL was introduced
   ];
@@ -34,7 +34,7 @@ stdenv.mkDerivation {
     ''
       clang -c $src/main.c -o main.o $CLANG_FLAGS
     ''
-    + lib.optionalString stdenv.isDarwin ''
+    + lib.optionalString stdenv.hostPlatform.isDarwin ''
       clang $OBJC_FLAGS $CLANG_FLAGS \
                   -framework Foundation -framework AppKit \
                   $src/os/darwin.m main.o -o SetWallpaper

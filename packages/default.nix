@@ -6,11 +6,10 @@ let
 in
 {
   inherit claude-code;
+  antigravity-cli = pkgs.callPackage ./antigravity-cli/package.nix { };
   claude-code-acp = pkgs.callPackage ./claude-code-acp/package.nix { inherit claude-code; };
   codex = pkgs.callPackage ./codex/package.nix { };
   codex-acp = pkgs.callPackage ./codex-acp/package.nix { };
   moshi-hook = pkgs.callPackage ./moshi-hook/package.nix { };
-  grok-build = pkgs.callPackage ./grok-build/package.nix { };
   executor = pkgs.callPackage ./executor/package.nix { };
-  opencode = pkgs.callPackage ./opencode/package.nix { };
 }

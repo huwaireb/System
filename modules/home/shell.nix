@@ -39,6 +39,33 @@ in
       '';
     };
 
+    # Separate Claude Code profiles: isolated creds/history/settings per account.
+    # Both were seeded from ~/.claude so behaviour is identical; log the second
+    # account in with e.g. `claude-work auth login`.
+    functions.claude-work = {
+      description = "Claude Code with work account (CLAUDE_CONFIG_DIR=~/.claude-work)";
+      body = ''
+        CLAUDE_CONFIG_DIR=$HOME/.claude-work command claude $argv
+      '';
+    };
+
+    functions.claude-personal = {
+      description = "Claude Code with personal account (CLAUDE_CONFIG_DIR=~/.claude-personal)";
+      body = ''
+        CLAUDE_CONFIG_DIR=$HOME/.claude-personal command claude $argv
+      '';
+    };
+
+    # Second subscription: isolated creds/history/settings. Seed once from
+    # ~/.claude if you want identical behaviour, then log in with
+    # e.g. `claude-v2 auth login`.
+    functions.claude-v2 = {
+      description = "Claude Code with second subscription (CLAUDE_CONFIG_DIR=~/.claude-v2)";
+      body = ''
+        CLAUDE_CONFIG_DIR=$HOME/.claude-v2 command claude $argv
+      '';
+    };
+
     functions.fish_mode_prompt = ""; # Set in fish_prompt
     functions.fish_prompt = ''
       set -l normal (set_color normal)

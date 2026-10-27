@@ -21,7 +21,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable && stdenv.isDarwin) {
+  config = lib.mkIf (cfg.enable && stdenv.hostPlatform.isDarwin) {
     home.activation.setWallpaper = hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD ${lib.getExe setWallpaper} "${cfg.path}"
     '';

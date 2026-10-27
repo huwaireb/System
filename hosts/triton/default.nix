@@ -2,6 +2,7 @@
   self,
   pkgs,
   config,
+  options,
   ...
 }:
 {
@@ -18,7 +19,14 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  networking.enableIPv6 = false;
+  # BFQ instead of kyber on NVMe: kyber ignores cgroup io weights, so the
+  # t3code.service IOWeight=1000 did nothing and on-disk test Postgres
+  # writeback starved the t3 server's SQLite fsyncs (multi-second stalls,
+  # client reconnect loops).
+  services.udev.extraRules = ''
+    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ATTR{queue/scheduler}="bfq"
+  '';
+
   networking.hostName = "triton";
   networking.wireguard.interfaces.wg0 = {
     ips = [ "10.10.10.7/24" ];
@@ -41,6 +49,9 @@
   home-manager.users.rmu = import ./home.nix;
   users.users.rmu = {
     isNormalUser = true;
+    # t3code.service (from `t3 service install`) runs in the user manager;
+    # keep it up without a login session.
+    linger = true;
     initialPassword = "makebarty";
     extraGroups = [
       "wheel"
@@ -106,6 +117,45 @@
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   programs.nix-ld.enable = true;
+  # T3 Code's preview browser is a downloaded Chrome build; nix-ld must supply
+  # its shared libraries. Assigning the list replaces the module default, so
+  # extend that default rather than dropping zlib/openssl/curl/etc.
+  programs.nix-ld.libraries =
+    options.programs.nix-ld.libraries.default
+    ++ (with pkgs; [
+      glib
+      nspr
+      nss
+      at-spi2-core # atk, atk-bridge, atspi
+      dbus
+      expat
+      libgbm
+      libxkbcommon
+      systemd
+      alsa-lib
+      libx11
+      libxcb
+      libxcomposite
+      libxdamage
+      libxext
+      libxfixes
+      libxrandr
+      # Not in T3's first error but loaded right after by headless Chrome.
+      pango
+      cairo
+      cups
+      libdrm
+    ]);
+
+  security.pki.caCertificateBlacklist = [
+    # CVE-2026-111943
+    "Comodo AAA Services root"
+    # https://hg-edge.mozilla.org/projects/nss/rev/26d38a0c3fb81e7fb2acedbaf4c42dd21dce0517
+    "emSign ECC Root CA - G3"
+    # https://hg-edge.mozilla.org/projects/nss/rev/8159223c48ceeb1273a1915bca95a517294ab0e0
+    "emSign Root CA - C1"
+    "emSign ECC Root CA - C3"
+  ];
 
   system.stateVersion = "25.05";
 }

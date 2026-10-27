@@ -10,6 +10,7 @@
     herdr.enable = true;
     moshi.enable = true;
     executor.enable = true;
+    devreaper.enable = true;
   };
 
   home.packages = with pkgs; [

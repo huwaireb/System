@@ -6,7 +6,7 @@ in
 {
   programs.zed-editor = {
     package = lib.mkIf is-darwin (writeScriptBin "not-zed" "");
-    installRemoteServer = pkgs.stdenv.isLinux;
+    installRemoteServer = pkgs.stdenv.hostPlatform.isLinux;
     userSettings = {
       theme = "Catppuccin Espresso (Blur)";
       project_panel.dock = "right";
